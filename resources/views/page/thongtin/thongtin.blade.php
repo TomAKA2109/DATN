@@ -1,8 +1,11 @@
 @extends('index.index') {{-- hoặc layout bạn đang dùng --}}
 
+@section('title')
+Thông tin cá nhân
+@endsection
+
 @section('header')
 	@include('page.header')
-    @include('page.mainmenu')
 @endsection
 
 @section('content')
@@ -22,7 +25,6 @@
                         </div>
                         <div class="about">
                             <h5>Giới thiệu</h5>
-                            <p>Tôi là {{ $khachhang->ten ?? '...' }}. Tôi yêu thích việc tạo ra các trải nghiệm người dùng tuyệt vời.</p>
                         </div>
                     </div>
                 </div>
@@ -47,30 +49,42 @@
 
                             <div class="col-md-6 col-sm-12">
 
-                                <div class="form-group">
+                                <div class="form-group has-error">
                                     <label for="fullName">Họ tên</label>
-                                    <input type="text" class="form-control" id="fullName" name="ten" value="{{ $khachhang->ten ?? '' }}" placeholder="Nhập họ tên">
+                                    <input type="text" class="form-control {{ $errors->has('ten') ? 'is-invalid' : '' }}" id="fullName" name="ten" value="{{ old('ten', $khachhang->ten) }}" placeholder="Nhập họ tên">
+                                    @error('ten')
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('ten') }}
+                                        </div>
+                                    @enderror
                                 </div>
                             </div>
 
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="username">Tên đăng nhập</label>
-                                    <input type="text" class="form-control" id="username" name="username" value="{{ $khachhang->username ?? '' }}" placeholder="Tên đăng nhập">
+                                    <input type="text" class="form-control border-none" id="username" disabled value="{{ $khachhang->username ?? '' }}" placeholder="Tên đăng nhập">
+                                    <input type="hidden" id="username" name="username" value="{{ $khachhang->username ?? '' }}" placeholder="Tên đăng nhập">
+
                                 </div>
                             </div>
 
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="phone">Số điện thoại</label>
-                                    <input type="text" class="form-control" id="phone" name="sdt" value="{{ $khachhang->sdt ?? '' }}" placeholder="Số điện thoại">
+                                    <input type="text" class="form-control  " id="phone" name="sdt" value="{{ old('sdt', $khachhang->sdt) }}" placeholder="Số điện thoại">
+                                    @error('sdt')
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('sdt') }}
+                                        </div>
+                                    @enderror
                                 </div>
                             </div>
 
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="mail">Email</label>
-                                    <input type="email" class="form-control" id="mail" name="mail" value="{{ $khachhang->mail ?? '' }}" placeholder="Email">
+                                    <input type="email" class="form-control" id="mail" name="mail" value="{{ old('mail',$khachhang->mail) }}" placeholder="Email">
                                 </div>
                             </div>
 
@@ -88,14 +102,20 @@
                                     </div>
                                 </div>
 
-                        
+
                             <div class="col-xl-12">
                                 <h6 class="mt-3 mb-2 text-primary">Địa chỉ</h6>
                             </div>
                             <div class="col-xl-12">
                                 <div class="form-group">
                                     <label for="diachi">Địa chỉ</label>
-                                    <input type="text" class="form-control" id="diachi" name="diachi" value="{{ $khachhang->diachi ?? '' }}" placeholder="Nhập địa chỉ">
+                                    <input type="text" class="form-control {{ $errors->has('diachi') ? 'is-invalid' : '' }}" id="diachi" name="diachi" value="{{ old('diachi', $khachhang->diachi) }}" placeholder="Nhập địa chỉ">
+                                    @error('diachi')
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('diachi') }}
+                                        </div>
+                                    @enderror
+
                                 </div>
                             </div>
 

@@ -1,4 +1,4 @@
-*{ 
+*{
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -173,7 +173,7 @@ body {
 		font-size:20px;
 		color:#f90
 		}
-		#mainmenu{ 
+		#mainmenu{
 			width: 100%;
 			height:32px;
 			background: #f2f2f2;
@@ -188,13 +188,13 @@ body {
 			height: 420px;
 			float: right;
 			bottom: 30px;
-			
+
 		}
 		.sb_right{
 			float: right;
 			font-size: large;
 			color: #CDC0E6;
-			
+
 		}
 		#ulmenu{
 			list-style-type: none;
@@ -220,8 +220,8 @@ body {
 			background: #f2f2f2;
 			width: 230px;
 			left: 220px;
-			border-left: 5px solid #00cc66;	
-			z-index: 10;		
+			border-left: 5px solid #00cc66;
+			z-index: 10;
 		}
 		.ulsmenu_l>li{
 			height: 35px;
@@ -249,7 +249,7 @@ body {
 		}
 		#ulmenu .child .ulsmenu_l li:hover a{
 			color: #00cc66;
-		}	
+		}
 		.ulsmenu_l .right{
 			position: relative;
 			left: 170px;
@@ -311,7 +311,7 @@ body {
 		    position: absolute;
 		    top: 0;
 		    right: 0;
-		    
+
 		}
 		#content .more:hover{
 			color: #00cc66;
@@ -401,7 +401,6 @@ body {
 			cursor: pointer;
 		}
 		#footer{
-		width: 1140px;
 		margin: auto;
 		min-height: 450px;
 		font-size:15px;
@@ -412,7 +411,7 @@ body {
 		#footer #footer_left{
 			width: 29.9%;
 			border: none;
-			display: inline-table;	
+			display: inline-table;
 			height: 400px;
 		}
 		#footer #footer_center{
@@ -431,7 +430,6 @@ body {
 			height: 400px;
 		}
 		#footer h2{
-			margin-left: 40px;
 			color: #00cc66;
 			line-height: 80%;
 			font-size: 150%;
@@ -443,18 +441,16 @@ body {
 		}
 		#footer a{
 			text-decoration: none;
-			margin-left: 50px;
 			font-weight: bold;
 			color: #000000;
 			line-height: 120%;
 
 		}
 		#footer a:hover{
-			color: #00cc66;	
+			color: #00cc66;
 		}
 		#footer p{
 			text-decoration: none;
-			margin-left: 50px;
 			font-weight: bold;
 			color: #000000;
 			line-height: 120%;
@@ -463,11 +459,11 @@ body {
 			color: #00cc66;
 			font-weight: bold;
 		}
-		#footer #footer_last{
+		#footer_last{
 			height: 50px;
-			background:  #00cc66;
+            background-color: #00cc66;
 		}
-		
+
 		.row.gutters {
 			margin-left: -8px;
 			margin-right: -8px;

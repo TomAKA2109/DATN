@@ -96,22 +96,26 @@
         <div class="col-sm-6 col-md-4 col-md-offset-4">
             <h1 class="text-center login-title">Vui lòng sử dụng tài khoản của website để đăng nhập!</h1>
             <div class="account-wall">
-                <img class="profile-img" src="{{ url('/image/Vista_icons_08.png') }}"
-                    alt="">
-                <form class="form-signin" action="{{ url('admin/admin') }}" method="post">
-                	{{ csrf_field() }}
-                <input type="text" class="form-control" placeholder="Username" name="username" required autofocus>
-                <input type="password" class="form-control" placeholder="Password" name="pass" required>
-                <button class="btn btn-lg btn-primary btn-block" type="submit">
-                    Đăng nhập</button>
-                <label class="checkbox pull-left">
-                    <input type="checkbox" value="remember-me">
-                    Lưu mật khẩu
-                </label>
-                <a href="#" class="pull-right need-help">Trợ giúp? </a><span class="clearfix"></span>
+                <img class="profile-img" src="{{ url('/image/Vista_icons_08.png') }}" alt="">
+                <form class="form-signin" action="{{ url('/kh_login') }}" method="post">
+                @csrf
+                    <div class="form-group">
+                        <label for="username">Tên đăng nhập</label>
+                        <input type="text" class="form-control" placeholder="Username" name="username" required autofocus>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Mật khẩu</label>
+                        <input type="password" class="form-control" placeholder="Password" name="password" required>
+                    </div>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">
+                        Đăng nhập</button>
+                    <label class="checkbox pull-left">
+                        <input type="checkbox" value="remember-me" checked> Lưu mật khẩu
+                    </label>
+                    <a href="#" class="pull-right need-help">Trợ giúp? </a><span class="clearfix"></span>
                 </form>
             </div>
-            <a href="{{ route('adminsqlkhachhang/addusers') }}" class="text-center new-account">Tạo tài khoản mới </a>
+            <a href="{{ route('dangki') }}" class="text-center new-account">Tạo tài khoản mới </a>
         </div>
     </div>
 </div>
