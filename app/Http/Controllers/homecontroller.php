@@ -37,7 +37,7 @@ class homecontroller extends Controller
     	return View('admin.adduser');
     }
 
-    
+
 
     public function getThongTin(){
         // Lấy thông tin người dùng từ cookie/session
@@ -93,7 +93,7 @@ class homecontroller extends Controller
     }
 
 
-    
+
     function getsachkinhte(Request $req){
         $id=$req->id;
         $danhmuc_id=danhmuc::find($id);
@@ -173,7 +173,7 @@ class homecontroller extends Controller
         }
     	return View('page.danhmucsanpham.danhmucsach',compact('id','danhmuc_id','sach_danhmuc_id','tacgia','error','nxbs'));
     }
-    function danhmuc_tacgia($id,$tacgia){ 
+    function danhmuc_tacgia($id,$tacgia){
         $danhmuc_id=danhmuc::find($id);
         $danhmucsach_id=sach::where('maloai',$danhmuc_id->id)->get();
         $danhmucsach_tacgia=sach::where('tacgia',$tacgia)->get();
@@ -204,10 +204,10 @@ class homecontroller extends Controller
             $tacgia[$dem]['sl']=0;
         }
         for($i=0;$i<count($tacgia);$i++){
-            foreach ( $danhmucsach_id as $sachs) { 
+            foreach ( $danhmucsach_id as $sachs) {
                 if($tacgia[$i]['tacgia']==$sachs->tacgia)
                 {
-                    $tacgia[$i]['sl']+=1; 
+                    $tacgia[$i]['sl']+=1;
                 }
             }
        }
@@ -270,7 +270,7 @@ class homecontroller extends Controller
 
     	return View('page.danhmucsanpham.danhmuc',compact('danhmuc','danhmucDangxem','nxb','sach','tacgias','loaisach'));
     }
-    
+
 
     function getlocTheoTacGia($madanhmuc, $tacgia) {
         $danhmuc = danhmuc::all();
@@ -309,7 +309,7 @@ class homecontroller extends Controller
     	return View('page.danhmucsanpham.loaisach',compact('sach','loaisach','danhmuc'));
         // return [$sach, $loaisach];
     }
-    
+
     function chitietsanpham(Request $request)
     {   $id=$request->id;
         $danhmuc = danhmuc::all();
@@ -327,7 +327,7 @@ class homecontroller extends Controller
         $product_cart = Session::get('cart');
         $oldcart=Session('cart')?Session::get('cart'):null;
         $cart=new Cart($oldcart);
-        $cart->add($product,$id); 
+        $cart->add($product,$id);
         $req->session()->put('cart',$cart);
         return redirect()->back()->with([
             'totalQty' => $cart->totalQty,
@@ -341,7 +341,7 @@ class homecontroller extends Controller
             if($carts['item']['id']==$id){
                 if ($carts['qty']<$qty) {
                     $cart=new Cart($oldcart);
-                    $cart->add($product,$id); 
+                    $cart->add($product,$id);
                     $req->session()->put('cart',$cart);
                 }
                 else
@@ -357,7 +357,7 @@ class homecontroller extends Controller
                    }
             }
         }
-         return redirect()->back(); 
+         return redirect()->back();
     }
     function getDelItemCart($id){
          $oldcart=Session::has('cart')?Session::get('cart'):null;
@@ -369,7 +369,7 @@ class homecontroller extends Controller
          else{
             session()->forget('cart');
          }
-          return redirect()->back(); 
+          return redirect()->back();
     }
     function getCheckout(){
         $danhmuc=danhmuc::all();
@@ -420,7 +420,7 @@ class homecontroller extends Controller
 
         if (count($sach) == 0) {
             $error = "Không Tìm Thấy Sản Phẩm Nào Với Từ Khóa: \"$key\". Vui Lòng Tìm Kiếm Sản Phẩm Khác!";
-            
+
             // Truyền thêm các biến với mảng rỗng để tránh lỗi
             $sach = collect();
             $loaisach = [];

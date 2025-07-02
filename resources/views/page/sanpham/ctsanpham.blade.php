@@ -189,17 +189,17 @@
 </tr>
     </table>
     <div class="goshop cfields">
-    	<br>
+    	<br />
         <a href="{{ route('themvaogiohang',$sach->id) }}">Thêm vào giỏ hàng</a>
-     </div>
+    </div>
 </div>
 
             <div class="block" id="module_AlsoBought">
 	<h3>Có thể bạn quan tâm</h3>
 	<div class="blockcontent">
         <div style="position:relative; padding:0 0; overflow:hidden; height:320px;">
-       @foreach($sach_lienquan as $sach_lienquans)
-       <div class="product_contener">
+        @foreach($sach_lienquan as $sach_lienquans)
+        <div class="product_contener">
 	        <div class="products">
 			<div class="image"><a href="{{ route('chitietsanpham',$sach_lienquans->id) }}" title=""><img src="{{ asset('/image/anhsanpham').'/'.$sach_lienquans->anhbia }}" alt="" title="" /></a>
 				@if($sach_lienquans->khuyenmai>0)
