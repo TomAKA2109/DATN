@@ -28,11 +28,20 @@
 		</div>
 		<div id="container">
 			@yield('slide')
-			@yield('content')	
+			@yield('content')
 		</div>
 		<div id="footer">
-			@yield('footer')
+            <div class="container">
+			    @yield('footer')
+            </div>
 		</div>
+        <div id="footer_last">
+            <div class="container">
+                <h4 style="color: white;text-align: center;line-height: 50px;font-size: 18px;">
+                    Hỗ trợ khách hàng - Zalo: 096 1763070
+                </h4>
+            </div>
+        </div>
 	</div>
 	@stack('scripts')
 </body>

@@ -242,7 +242,7 @@
             <div id="div0">
                 <div class="comment_list">
                     <div id="comment_contener" style="background: lavender;height: 200px;padding-left: 30px;padding-right: 30px;">
-                        <br>
+                        <br/>
                         <b>Không tìm thấy nhận xét nào cho sản phẩm này</b>
                         <textarea class="form-control" rows="3" style="padding-left: 30px;"></textarea>
                         <input type="button" value="Gửi" class="btn btn-primary" style="margin-top: 5px;">
