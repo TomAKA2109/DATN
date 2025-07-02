@@ -91,7 +91,7 @@
 	function changeqty(editButton, id) {
 		var row = $(editButton).parent();
 		var qty = $("#qty", row).val();
-		location.assign('/laravel/sachhay/update-cart/' + id + '-' + qty);
+		location.assign('/update-cart/' + id + '-' + qty);
 	}
 
 	$(document).ready(function () {

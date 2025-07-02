@@ -16,7 +16,6 @@ class qlidonhangcontroller extends Controller
     public function postCheckout(Request $req)
     {
         $cart = Session::get('cart');
-        $danhmuc = danhmuc::all();
 
         if (!$cart || !is_object($cart)) {
             return redirect()->back()->with('error', 'Giỏ hàng trống hoặc không hợp lệ.');
@@ -55,16 +54,17 @@ class qlidonhangcontroller extends Controller
         }
 
         session()->forget('cart');
-        return view('page.sanpham.checkout')->with([
-            'thongbao' => 'Đặt hàng thành công!',
-            'danhmuc' => $danhmuc
+
+        return redirect('/dat-hang')->with([
+            'thongbao' => "Đặt hàng thành công! Kiểm tra đơn hàng tại <a href='/donhang'>Đơn hàng của tôi</a>",
         ]);
     }
-     function qldondathang(){
+
+    function qldondathang(){
         $dondathang=dondathang::all();
         return view('admin.qldonhang',compact('dondathang'));
-                  
     }
+
     function qlchitietdonhang($id_donhang){
         $chitietdondathang=chitietdondathang::where('id_dondathang',$id_donhang)->get();
         $sach = sach::all();

@@ -37,8 +37,8 @@ Route::get('/kh_login',[khachhangcontroller::class,'hienThiDangNhap'])->name('kh
 Route::post('/kh_login',[khachhangcontroller::class,'dangnhap']);
 Route::get('/kh_logout',[admincontroller::class,'kh_logout'])->name('kh_logout');
 Route::get('add-to-card/{id}', [homeController::class, 'getAddToCart'])->name('themvaogiohang');
-Route::get('delete-cart/{id}',['as'=>'xoagiohang','uses'=>[homecontroller::class,'getDelItemCart']]);
-Route::get('update-cart/{id}-{qty}',['as'=>'capnhatgiohang','uses'=>[homecontroller::class,'getUpdateItemCart']]);
+Route::get('delete-cart/{id}',[homecontroller::class,'getDelItemCart'])->name('xoagiohang');
+Route::get('update-cart/{id}-{qty}',[homecontroller::class,'getUpdateItemCart'])->name('capnhatgiohang');
 Route::get('dat-hang/', [homeController::class, 'getCheckout'])->name('getdathang');
 Route::post('dat-hang/', [QliDonHangController::class, 'postCheckout'])->name('postdathang');
 Route::post('/timkiem/',['as'=>'timkiem', 'uses'=>[homecontroller::class,'timkiem']]);

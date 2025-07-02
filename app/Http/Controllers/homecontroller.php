@@ -357,16 +357,16 @@ class homecontroller extends Controller
          return redirect()->back();
     }
     function getDelItemCart($id){
-         $oldcart=Session::has('cart')?Session::get('cart'):null;
-         $cart=new Cart($oldcart);
-         $cart->removeItem($id);
-         if(count($cart->items)>0){
+        $oldcart=Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldcart);
+        $cart->removeItem($id);
+        if(count($cart->items)>0){
             Session::put('cart',$cart);
-         }
-         else{
+        }
+        else{
             session()->forget('cart');
-         }
-          return redirect()->back();
+        }
+        return redirect()->back();
     }
     function getCheckout(){
         $danhmuc=danhmuc::all();
