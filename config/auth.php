@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\khachhang;
+
 return [
 
     /*
@@ -40,6 +42,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'customers' => [
+            'driver' => 'session',
+            'provider' => 'customers'
+        ]
     ],
 
     /*
@@ -64,6 +70,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
+        'customers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\khachhang::class
+        ]
 
         // 'users' => [
         //     'driver' => 'database',

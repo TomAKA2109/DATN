@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User as user;
-use Redirect;
 use App\Models\khachhang;
 use App\Models\chitietsach;
 use App\Models\sach as sach;
@@ -12,12 +10,9 @@ use App\Models\loaisach as loaisach;
 use App\Models\ngonngu;
 use App\Models\nhaxuatban as nhaxuatban;
 use App\Models\dondathang;
-use App\Models\danhmuc;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
-// Removed duplicate use statement for Redirect
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,7 +22,7 @@ class admincontroller extends Controller
     	return View('admin.login');
     }
     function getkhachhang(){
-        return View('admin.adduser');  
+        return View('admin.adduser');
     }
 
     function addkhachhang1(){
@@ -45,7 +40,7 @@ class admincontroller extends Controller
 
         $khachhang = khachhang::all();
    		return View('admin.qlkhachhang', compact('khachhang'));
-        
+
     }
 
     function postkhachhang(Request $req){
@@ -57,7 +52,7 @@ class admincontroller extends Controller
         $khachhang->diachi=$req->txtdiachi;
         $khachhang->mail=$req->email;
         $khachhang->save();
-        
+
         return View('admin.login')->with(['thongbao'=>'Tạo tài khoản thành công!']);
     }
     function getloaisach(){
@@ -67,37 +62,33 @@ class admincontroller extends Controller
     return View('page.danhmucsanpham.sachmoi');
    }
     function postlogin(Request $request){
-    //     $this->validate($request,[
-    //         'username'=>'min:10',
-    //     ],
-    //     ['username.min'=>"min length is 10"]
-    // );
-    	$username=$request->username;
-    	$password=$request->pass;
-        $khachhang_login=DB::table('taikhoan')->where('username','=',$username)->get();
-        $minutes = 30;
-        $login=['username'=>$username,'password'=>$password,'maquyen'=>1];
-        $khachhang = khachhang::all();
-    	if(\Auth::attempt($login)){
-            $khachhang = khachhang::all();
-              Cookie::queue(Cookie::make('name',$username, $minutes));
-   			return View('admin.qlkhachhang', compact('khachhang'));
-    	}
-    	elseif(count($khachhang_login)>0){ 
-            if (count($khachhang_login) > 0 && isset($khachhang_login[0]->password) && \Hash::check($password, $khachhang_login[0]->password)) {
-                Cookie::queue(Cookie::make('khachhang_login',$username, 60));
-                return redirect('home'); 
-            }
+    	// $username=$request->username;
+    	// $password=$request->pass;
+        // $khachhang_login=
+        // $minutes = 30;
+        // $login=['username'=>$username,'password'=>$password,'maquyen'=>1];
+        // $khachhang = khachhang::all();
+        // if(\Auth::attempt($login)){
+        //     $khachhang = khachhang::all();
+        //     Cookie::queue(Cookie::make('name',$username, $minutes));
+   		//     return View('admin.qlkhachhang', compact('khachhang'));
+        // }
+        // else if(count($khachhang_login)>0){
+        //     if (count($khachhang_login) > 0 && isset($khachhang_login[0]->password) && \Hash::check($password, $khachhang_login[0]->password)) {
+        //         Cookie::queue(Cookie::make('khachhang_login',$username, 60));
+        //         return redirect('home');
+        //     }
 
-            else{
-                Session::flash('message', "Vui lòng kiểm tra lại tài khoản mật khẩu!");
-                return back();
-            }
-        }
-        else{
-             Session::flash('message', "Vui lòng kiểm tra lại tài khoản mật khẩu!");
-                return back(); 
-        }
+        //     else{
+        //         Session::flash('message', "Vui lòng kiểm tra lại tài khoản mật khẩu!");
+        //         return back();
+        //     }
+        // }
+        // else
+        // {
+        //     Session::flash('message', "Vui lòng kiểm tra lại tài khoản mật khẩu!");
+        //         return back();
+        // }
     }
 
     function postlogin1(Request $request){
@@ -117,10 +108,10 @@ class admincontroller extends Controller
               Cookie::queue(Cookie::make('name',$username, $minutes));
    			return View('admin.qlkhachhang', compact('khachhang'));
     	}
-    	elseif(count($khachhang_login)>0){ 
+    	elseif(count($khachhang_login)>0){
             if (count($khachhang_login) > 0 && isset($khachhang_login[0]->password) && \Hash::check($password, $khachhang_login[0]->password)) {
                 Cookie::queue(Cookie::make('khachhang_login',$username, 60));
-                return redirect('home'); 
+                return redirect('home');
             }
 
             else{
@@ -130,14 +121,14 @@ class admincontroller extends Controller
         }
         else{
              Session::flash('message', "Vui lòng kiểm tra lại tài khoản mật khẩu!");
-                return back(); 
+                return back();
         }
     }
 
-    
+
 
     function kh_logout(){
-        Cookie::queue(Cookie::forget('khachhang_login')); 
+        Cookie::queue(Cookie::forget('khachhang_login'));
         return redirect('home');
     }
     function qlkhachhang(){
@@ -154,7 +145,7 @@ class admincontroller extends Controller
 
     function editkhachhang(Request $req){
             $id=$req->id;
-            $userData = khachhang::find($id); 
+            $userData = khachhang::find($id);
             $userData->ten = request('ten');
             $userData->username = request('username');
             if(request('password')!=""){
@@ -163,7 +154,7 @@ class admincontroller extends Controller
             $userData->diachi = request('diachi');
             $userData->mail = request('mail');
             $userData->save();
-            return json_encode(array('statusCode'=>200));   
+            return json_encode(array('statusCode'=>200));
             }
             else{
             $userData->sdt = request('sdt');
@@ -172,7 +163,7 @@ class admincontroller extends Controller
             $userData->save();
             return json_encode(array('statusCode'=>200));
             }
-            
+
 
 
     }
@@ -209,7 +200,7 @@ class admincontroller extends Controller
         $sach->sotap=$req->sotap;
         $sach->save();
         return response()->json([
-       'success'   => 'add Successfully'   
+       'success'   => 'add Successfully'
       ]);
     }
     function sach_update(Request $req){
@@ -228,7 +219,7 @@ class admincontroller extends Controller
         $sach->save();
         $req->file();
         return response()->json([
-            'ok'   => 'update Successfully'   
+            'ok'   => 'update Successfully'
         ]);
     }
     function qlsach_delete(Request $req){
@@ -266,7 +257,7 @@ class admincontroller extends Controller
         $chitietsach->save();
         return redirect('admin/qlchitietsach');
     }
-    
+
     function qlchitietsach_edit($id){
        $chitietsach=chitietsach::all();
        $sachs = sach::findOrFail($id);

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Login</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<title>Đăng kí</title>
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 	<style>
@@ -87,31 +87,61 @@
 </head>
 <body>
 	<div class="container">
-		@if(Session::has('message'))
-				<script>
-					alert("{!! addslashes(Session::get('message')) !!}");
-				</script>
-				@endif
+        @if(Session::has('message'))
+            <script>
+                alert("{!! addslashes(Session::get('message')) !!}");
+            </script>
+        @endif
     <div class="row" style="margin-top: 100px;">
         <div class="col-sm-6 col-md-4 col-md-offset-4">
-            <h1 class="text-center login-title">Vui lòng sử dụng tài khoản của website để đăng nhập!</h1>
+            <h1 class="text-center login-title">Đăng kí thành viên</h1>
             <div class="account-wall">
                 <img class="profile-img" src="{{ url('/image/Vista_icons_08.png') }}"
                     alt="">
-                <form class="form-signin" action="{{ url('admin/admin') }}" method="post">
-                	{{ csrf_field() }}
-                <input type="text" class="form-control" placeholder="Username" name="username" required autofocus>
-                <input type="password" class="form-control" placeholder="Password" name="pass" required>
+                <form class="form-signin" action="{{ url('dangki') }}" method="post">
+                @csrf
+                <div class="form-group {{ $errors->has('username') ? 'has-error' : ''  }}">
+                    <label for="username">Tên đăng nhập</label>
+                    <input type="text" class="form-control is-invalid" placeholder="Username" name="username" autofocus value="{{ old('username') }}"/>
+                    @error('username')
+                        <div class="help-block">
+                            {{ $errors->first('username') }}
+                        </div>
+                    @enderror
+                </div>
+                <div class="form-group {{ $errors->has('password') ? 'has-error' : ''  }}">
+                    <label for="pass">Mật khẩu</label>
+                    <input type="password" class="form-control" placeholder="Password" name="password" value="{{ old('password') }}"/>
+                    @error('password')
+                        <div class="help-block">
+                            {{ $errors->first('password') }}
+                        </div>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label for="pass">Nhập lại mật khẩu</label>
+                    <input type="password" class="form-control" placeholder="Password" name="password_confirmation" />
+                </div>
+
+                <div class="form-group {{ $errors->has('mail') ? 'has-error' : ''  }}">
+                    <label for="pass">Email</label>
+                    <input type="email" class="form-control" placeholder="Email" name="mail" value="{{ old('mail') }}"/>
+                    @error('mail')
+                        <div class="help-block">
+                            {{ $errors->first('mail') }}
+                        </div>
+                    @enderror
+                </div>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">
-                    Đăng nhập</button>
+                    Đăng kí</button>
                 <label class="checkbox pull-left">
-                    <input type="checkbox" value="remember-me">
+                    <input type="checkbox" value="remember-me" name="remember_me"/>
                     Lưu mật khẩu
                 </label>
                 <a href="#" class="pull-right need-help">Trợ giúp? </a><span class="clearfix"></span>
                 </form>
             </div>
-            <a href="{{ route('adminsqlkhachhang/addusers') }}" class="text-center new-account">Tạo tài khoản mới </a>
+            <a href="{{ route('kh_login') }}" class="text-center new-account">Quay trở lại trang đăng nhập </a>
         </div>
     </div>
 </div>
