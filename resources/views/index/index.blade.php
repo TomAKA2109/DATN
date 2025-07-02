@@ -32,7 +32,7 @@
 		</div>
 		<div id="footer">
             <div class="container">
-			    @yield('footer')
+		        @yield('footer')
             </div>
 		</div>
         <div id="footer_last">

@@ -5,7 +5,7 @@
 			<div id="logo" style="width: 342px;height: 55px;">
 				<a href="{{ url('home') }}">
 					<span style="font-weight: bold;font-size: 300%;line-height: 30px;">
-						<img src="{{ asset('image/logo.png') }}" alt="" style="padding-left: 30px;width: 170px;height: 55px;">
+						<img src="{{ asset('image/logo.png') }}" alt="" style="width: 170px;height: 55px;">
 					</span>
 				</a>
 			</div>

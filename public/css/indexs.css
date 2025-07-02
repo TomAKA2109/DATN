@@ -430,7 +430,6 @@ body {
 			height: 400px;
 		}
 		#footer h2{
-			margin-left: 40px;
 			color: #00cc66;
 			line-height: 80%;
 			font-size: 150%;
@@ -442,7 +441,6 @@ body {
 		}
 		#footer a{
 			text-decoration: none;
-			margin-left: 50px;
 			font-weight: bold;
 			color: #000000;
 			line-height: 120%;
@@ -453,7 +451,6 @@ body {
 		}
 		#footer p{
 			text-decoration: none;
-			margin-left: 50px;
 			font-weight: bold;
 			color: #000000;
 			line-height: 120%;
