@@ -110,8 +110,7 @@
                     <button class="btn btn-lg btn-primary btn-block" type="submit">
                         Đăng nhập</button>
                     <label class="checkbox pull-left">
-                        <input type="checkbox" value="remember-me">
-                        Lưu mật khẩu
+                        <input type="checkbox" value="remember-me" checked> Lưu mật khẩu
                     </label>
                     <a href="#" class="pull-right need-help">Trợ giúp? </a><span class="clearfix"></span>
                 </form>

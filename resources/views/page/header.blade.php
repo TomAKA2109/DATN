@@ -20,7 +20,11 @@
 
 			<div style="float: right;bottom:87px;position: relative;height: 30px;" id="login">
 				<label style="margin-right: 5px;">
-				@if (Cookie::get('khachhang_login') != false)
+				@if (!Cookie::get('khachhang_login'))
+                    <div style="margin-right: 30px; background: white;width: 100px; height: 30px;line-height: 30px;text-align: center;overflow: hidden;">
+                        <a href="{{ route('kh_login') }}" style="color: black;">Đăng nhập</a>
+                    </div>
+				@else
                     <div id="users" style="margin-right: 30px; position: relative; display: inline-block;">
                         <div style="background: white;width: 100px; height: 30px;line-height: 30px;text-align: center;overflow: hidden;cursor: pointer;">
                             {{ request()->cookie('khachhang_login') }}
@@ -30,10 +34,6 @@
                             <li style="padding: 5px 15px;"><a href="{{ url('donhang') }}" style="color: black;">Đơn hàng của tôi</a></li>
                             <li style="padding: 5px 15px;"><a href="{{ url('kh_logout') }}" style="color: black;">Đăng xuất</a></li>
                         </ul>
-                    </div>
-				@else
-                    <div style="margin-right: 30px; background: white;width: 100px; height: 30px;line-height: 30px;text-align: center;overflow: hidden;">
-                        <a href="{{ route('kh_login') }}" style="color: black;">Đăng nhập</a>
                     </div>
 				@endif
 				</label>

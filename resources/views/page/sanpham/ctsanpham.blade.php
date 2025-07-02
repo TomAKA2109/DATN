@@ -56,7 +56,7 @@
 		<div class="image_contenner">
         <div class="mainimage">
 		<img src="{{ asset('/image/anhsanpham').'/'.$sach->anhbia }}" id="mainimage" width="250"/>
-        
+
         </div>
     </div>
         <div class="product_info">
@@ -75,14 +75,14 @@
                 	<a href=""><i class="fa fa-star"></i> Thêm vào yêu thích</a>
                 </div>
                 <div class="clear"></div>
-            </div>        
+            </div>
             <div class="prices_contener">
                 <div class="prices">
                     <div class="saleprice">
                         <span id="saleprice">{{ number_format($sach->dongia-$sach->dongia*$sach->khuyenmai/100,0,",",".") }} ₫</span>
                     </div>
                     <div class="vrootprice" id="rootprice">Giá bìa: <span>{{ number_format($sach->dongia,0,",",".") }} ₫</span></div>
-                    <div class="yousave" id="yousave">Tiết kiệm: {{ number_format(($sach->dongia*$sach->khuyenmai/100),0,",",".") }} ₫<span> 
+                    <div class="yousave" id="yousave">Tiết kiệm: {{ number_format(($sach->dongia*$sach->khuyenmai/100),0,",",".") }} ₫<span>
                     	@if($sach->khuyenmai>0)
                     	({{ $sach->khuyenmai }})%
                     	@endif
@@ -106,11 +106,11 @@
             <div class="clear"></div>
             {{-- <div class="fb-like" data-href="http://nobita.vn/2896/yeu-anh-tu-cai-nhin-dau-tien-bo-2-tap-.html" data-layout="standard" data-action="like" data-show-faces="false" data-share="false"></div> --}}
         </div>
-        
+
     </div>
     <div class="clear" style="clear: both;"></div>
 </div>
-         
+
             <div class="block" id="module_ProductDetail">
 	<h3>Giới thiệu sách</h3>
     	<div class="intro" id="contentid">
@@ -118,10 +118,10 @@
 	<span style="color:#ff0000;"><span style="font-size:16px;">
           {{ $sach->tensach }}
         </span></span></p>
-        @php 
+        @php
         echo($chitietsanpham->noidung);
         @endphp
-        
+
 
         </div>
         {{-- <div class="viewmore" id="viewmore"><span>Xem thêm nội dung <i class="fa fa-sort-desc"></i></span></div> --}}
@@ -193,7 +193,7 @@
         <a href="{{ route('themvaogiohang',$sach->id) }}">Thêm vào giỏ hàng</a>
      </div>
 </div>
-            
+
             <div class="block" id="module_AlsoBought">
 	<h3>Có thể bạn quan tâm</h3>
 	<div class="blockcontent">
@@ -218,43 +218,42 @@
 			@else
 				<div class="rootprice">{{ number_format($sach_lienquans->dongia,0) }}₫</div>
 			@endif
-	        
+
 			</div>
-		</div>	
+		</div>
        @endforeach
         </div>
     </div>
 </div>
-    <br style="clear: both;">
-        <div class="block" id="module_Comments">
-    <h3>Gửi nhật xét của bạn</h3>
-    <div class="comment_form">
-        <div>
-            Vui lòng <a href='' title='đăng nhập'>đăng nhập</a> để viết nhận xét
-        </div>
-    </div>
+
     <h3>
-   		<ul id="tabnav">
+   	    <ul id="tabnav">
             <li><a href="javascript:" class="active" id="tab0" onclick="ShowTab(0)">Nhận xét của khách hàng</a></li>
             <li><a href="javascript:" id="tab1" onclick="ShowTab(1)"><i class="fa fa-facebook-square"></i>   Thảo luận</a></li>
         </ul>
     </h3>
     <a name="comment"></a>
-	<div class="blockcontent">
-    	<div id="div0">
-            <div class="comment_list">
-                <div id="comment_contener" style="background: lavender;height: 200px;padding-left: 30px;padding-right: 30px;">
-                    <br>
-                    <b>Không tìm thấy nhận xét nào cho sản phẩm này</b>
-                    <textarea class="form-control" rows="3" style="padding-left: 30px;"></textarea>
-                    <input type="button" value="Gửi  " class="btn btn-primary" style="margin-top: 5px;">
+    @if (!Cookie::get('khachhang_login'))
+        <div>
+            Vui lòng <a href='' title='đăng nhập'>đăng nhập</a> để viết nhận xét
+        </div>
+    @else
+        <div class="blockcontent">
+            <div id="div0">
+                <div class="comment_list">
+                    <div id="comment_contener" style="background: lavender;height: 200px;padding-left: 30px;padding-right: 30px;">
+                        <br>
+                        <b>Không tìm thấy nhận xét nào cho sản phẩm này</b>
+                        <textarea class="form-control" rows="3" style="padding-left: 30px;"></textarea>
+                        <input type="button" value="Gửi" class="btn btn-primary" style="margin-top: 5px;">
+                    </div>
                 </div>
             </div>
-         </div>
-         <div id="div1">
-            <div class="fb-comments" data-href="http://nobita.vn/2896/yeu-anh-tu-cai-nhin-dau-tien-bo-2-tap-.html" data-width="100%" data-numposts="5" data-colorscheme="light"></div>
-         </div>
-	</div>
+            <div id="div1">
+                <div class="fb-comments" data-href="http://nobita.vn/2896/yeu-anh-tu-cai-nhin-dau-tien-bo-2-tap-.html" data-width="100%" data-numposts="5" data-colorscheme="light"></div>
+            </div>
+        </div>
+    @endif
 </div>
     </div>
 @endsection
