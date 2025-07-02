@@ -14,7 +14,7 @@ class khachhang extends Authenticatable
         'sdt' => '',
         'diachi' => ''
     ];
-    protected $fillable = ['username', 'password', 'mail'];
+    protected $fillable = ['username', 'password', 'mail', 'sdt', 'ten','diachi'];
 
     public function setPasswordAttribute($value)
     {

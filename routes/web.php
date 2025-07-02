@@ -7,6 +7,7 @@ use App\Http\Controllers\admincontroller;
 use App\Http\Controllers\khachhangcontroller;
 use App\Http\Controllers\qldanhmuccontroller;
 use App\Http\Controllers\qlidonhangcontroller;
+use App\Http\Middleware\CustomerMustAuthenticated;
 use App\Models\khachhang;
 
 /*
@@ -27,8 +28,8 @@ Route::get('/admin/loaisach',[admincontroller::class,'getloaisach'])->name('admi
 Route::get('/danhmuc/{id}',[homecontroller::class,'getdanhmuc'])->name('danhmuc');
 Route::get('/danhmuc/{id}/{tacgia}',[homecontroller::class,'danhmuc_tacgia'])->name('danhmuc/tacgia');
 Route::get('/danh-muc/{id}/{tacgia}', [homecontroller::class,'getlocTheoTacGia'])->name('timtheotacgia');
-Route::get('/thongtincanhan', [homecontroller::class,'getThongtin'])->name('thongtin');
-Route::post('/capnhatthongtin', [homecontroller::class,'postCapNhatThongTin'])->name('capnhatthongtin');
+Route::get('/thongtincanhan', [homecontroller::class,'getThongtin'])->middleware([CustomerMustAuthenticated::class])->name('thongtin');
+Route::post('/capnhatthongtin', [homecontroller::class,'postCapNhatThongTin'])->middleware([CustomerMustAuthenticated::class])->name('capnhatthongtin');
 Route::get('/donhang', [homecontroller::class,'getDonHang'])->name('donhang')->name('donhang');
 Route::get('loaisach/{id}',[homecontroller::class,'getloaisach'])->name('loaisach');
 Route::get('sanpham/{id}',[homecontroller::class,'chitietsanpham'])->name('chitietsanpham');

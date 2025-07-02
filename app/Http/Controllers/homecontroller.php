@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class homecontroller extends Controller
 {
@@ -33,11 +34,9 @@ class homecontroller extends Controller
     	return View('page.home',compact('sl','danhmuc','loaisach','nxb','sach', 'totalQty', 'product_cart'));
     }
 
-    function addusers(){
+    public function addusers(){
     	return View('admin.adduser');
     }
-
-
 
     public function getThongTin(){
         // Lấy thông tin người dùng từ cookie/session
@@ -50,22 +49,20 @@ class homecontroller extends Controller
     }
 
     public function postCapNhatThongTin(Request $request){
-        $id = Cookie::get('khachhang_login');
-
-        DB::table('khachhang')->where('id', $request->id)->update([
-            'ten'     => $request->ten,
-            'username'     => $request->username,
-            'sdt'     => $request->sdt,
-            'diachi'  => $request->diachi,
-            'mail'    => $request->mail,
-            'updated_at' => now()
+        $username = Cookie::get('khachhang_login');
+        $customer = khachhang::where('username', $username)->first();
+        $request->validate([
+            'ten' => 'required',
+            'sdt' => 'required|unique:khachhang,sdt,'.$customer->id,
+            'diachi' => 'required'
         ]);
 
-        if (!empty($request->password)) {
-            $data['password'] = Hash::make($request->password);
+        if ($customer) {
+            $customer->update($request->input());
         }
 
-        return redirect()->route('home')->with('success', 'Cập nhật thông tin thành công!');
+        return redirect()->back()->with('success', 'Cập nhật thông tin thành công!');
+
     }
 
     function getDonHang(){
