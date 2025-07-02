@@ -17,24 +17,24 @@
 				</a>
 				<div id="producrslist"></div>
 			</div>
-			
+
 			<div style="float: right;bottom:87px;position: relative;height: 30px;" id="login">
 				<label style="margin-right: 5px;">
 				@if (Cookie::get('khachhang_login') != false)
-				<div id="users" style="margin-right: 30px; position: relative; display: inline-block;">
-					<div style="background: white;width: 100px; height: 30px;line-height: 30px;text-align: center;overflow: hidden;cursor: pointer;">
-						{{ request()->cookie('khachhang_login') }}
-					</div>
-					<ul id="user_menu" style="display: none; position: absolute; top: 30px; left: 0; background: white; border: 1px solid #ccc; list-style: none; padding: 5px 0; z-index: 100; width: 160px;">
-						<li style="padding: 5px 15px;"><a href="{{ url('thongtincanhan') }}" style="color: black;">Thông tin cá nhân</a></li>
-						<li style="padding: 5px 15px;"><a href="{{ url('donhang') }}" style="color: black;">Đơn hàng của tôi</a></li>
-						<li style="padding: 5px 15px;"><a href="{{ url('kh_logout') }}" style="color: black;">Đăng xuất</a></li>
-					</ul>
-				</div>
+                    <div id="users" style="margin-right: 30px; position: relative; display: inline-block;">
+                        <div style="background: white;width: 100px; height: 30px;line-height: 30px;text-align: center;overflow: hidden;cursor: pointer;">
+                            {{ request()->cookie('khachhang_login') }}
+                        </div>
+                        <ul id="user_menu" style="display: none; position: absolute; top: 30px; left: 0; background: white; border: 1px solid #ccc; list-style: none; padding: 5px 0; z-index: 100; width: 160px;">
+                            <li style="padding: 5px 15px;"><a href="{{ url('thongtincanhan') }}" style="color: black;">Thông tin cá nhân</a></li>
+                            <li style="padding: 5px 15px;"><a href="{{ url('donhang') }}" style="color: black;">Đơn hàng của tôi</a></li>
+                            <li style="padding: 5px 15px;"><a href="{{ url('kh_logout') }}" style="color: black;">Đăng xuất</a></li>
+                        </ul>
+                    </div>
 				@else
-				<div style="margin-right: 30px; background: white;width: 100px; height: 30px;line-height: 30px;text-align: center;overflow: hidden;">
-					<a href="{{ route('kh_login') }}" style="color: black;">Đăng nhập</a>
-				</div>
+                    <div style="margin-right: 30px; background: white;width: 100px; height: 30px;line-height: 30px;text-align: center;overflow: hidden;">
+                        <a href="{{ route('kh_login') }}" style="color: black;">Đăng nhập</a>
+                    </div>
 				@endif
 				</label>
 				<div class="cart" id="cart">

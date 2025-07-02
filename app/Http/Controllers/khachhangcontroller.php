@@ -21,6 +21,7 @@ class khachhangcontroller extends Controller
             'password' => 'required'
         ]);
         if (Auth::guard('customers')->attempt(['username' => $request->input('username'), 'password' => $request->input('password')])) {
+            Cookie::queue('khachhang_login', $request->input('username'), 30);
             return redirect('/home');
         }
     }
