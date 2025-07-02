@@ -1,6 +1,6 @@
 @extends('index.index')
 @section('title')
-	Chi tiết sản phẩm
+	Chi tiết sách
 @endsection
 @section('style')
 	<link rel="stylesheet" href="{{ asset('css/list_product.css') }}">

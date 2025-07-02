@@ -163,7 +163,7 @@
           <div class="card mb-3">
             <div class="card-header">
               <i class="fas fa-table"></i>
-              Data Table Example
+              Quản lý khách hàng
               <a href="{{ route('adminsqlkhachhang/addusers') }}"><input type="button" value="Thêm Sản Phẩm" id="btnadd"/></div>
             <div class="card-body"></a>
               <div class="table-responsive">
@@ -178,7 +178,7 @@
                       <th>Mail</th>
                       <th>Create_at</th>
                       <th>Update_at</th>
-                      <th>Edit</th>
+                      <th>Thao tác</th>
                     </tr>
                   </thead>
                   <tfoot>
@@ -191,7 +191,7 @@
                       <th>Mail</th>
                       <th>Create_at</th>
                       <th>Update_at</th>
-                      <th>Edit</th>
+                      <th>Thao tác</th>
                     </tr>
                   </tfoot>
                   <tbody>

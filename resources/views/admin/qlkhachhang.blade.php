@@ -1,286 +1,283 @@
 @extends('admin.admin')
+
 @section('khachhang')
-	<li class="nav-item active" >
-          <a class="nav-link" href="">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Quản lý khách hàng</span></a>
-    </li>
-@endsection()
-@section('tenbang')
-	<ol class="breadcrumb">
-            <li class="breadcrumb-item">
-              <a href="#">khachhang</a>
-            </li>
-            <li class="breadcrumb-item active">Tables</li>
-	</ol>
+<li class="nav-item active">
+    <a class="nav-link" href="">
+        <i class="fas fa-fw fa-table"></i>
+        <span>Quản lý khách hàng</span>
+    </a>
+</li>
 @endsection
+
+@section('tenbang')
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Khách hàng</a></li>
+    <li class="breadcrumb-item active">Quản lý khách hàng</li>
+</ol>
+@endsection
+
 @section('table')
 <div class="card mb-3">
-            <div class="card-header">
-              <i class="fas fa-table"></i>  
-              Quản lý khách hàng
-              <a href="{{ route('adminsqlkhachhang1/addusers') }}">
-                  <button id="btnadd" class="btn btn-primary">Thêm Khách Hàng</button>
-              </a>
-
-
-            </div>
-            <div class="card-body">
-              <div class="table-responsive">
-	<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
+    <div class="card-header">
+        <i class="fas fa-table"></i>
+        Quản lý khách hàng
+        <a href="{{ route('adminsqlkhachhang1/addusers') }}" class="btn btn-primary float-right">
+            Thêm Khách Hàng
+        </a>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead class="thead-dark">
                     <tr>
-                      <th>ID</th>
-                      <th>Họ tên</th>
-                      <th>UserName</th>
-                      <th>PhoneNumber</th>
-                      <th>Địa chỉ</th>
-                      <th>Mail</th>
-                      <th>Create_at</th>
-                      <th>Update_at</th>
-                      <th>Edit</th>
+                        <th>ID</th>
+                        <th>Họ tên</th>
+                        <th>Username</th>
+                        <th>Số điện thoại</th>
+                        <th>Địa chỉ</th>
+                        <th>Email</th>
+                        <th>Ngày tạo</th>
+                        <th>Ngày cập nhật</th>
+                        <th>Thao tác</th>
                     </tr>
-                  </thead>
-                  <tfoot>
-                    <tr>
-                      <th>ID</th>
-                      <th>Họ tên</th>
-                      <th>UserName</th>
-                      <th>PhoneNumber</th>
-                      <th>Địa chỉ</th>
-                      <th>Mail</th>
-                      <th>Create_at</th>
-                      <th>Update_at</th>
-                      <th>Edit</th>
-                    </tr>
-                  </tfoot>
-                  <tbody>
+                </thead>
+                <tbody>
                     @foreach($khachhang as $kh)
-                        <tr>
-                        <td><label id="lblid">{{ $kh->id }}</label></td>
-                        <td><label id="lblten">{{ $kh->ten }}</label></td>
-                        <td><label id="lblusername">{{ $kh->username }}</td>
-                        <td><label id="lblsdt">{{ $kh->sdt }}</td>
-                        <td><label id="lbldiachi">{{ $kh->diachi }}</td>
-                        <td><label id="lblmail">{{ $kh->mail }}</td>
-                        <td>{{ $kh->created_at }}</td>
-                        <td>{{ $kh->updated_at }}</td>
+                    <tr>
+                        <td><span data-field="id">{{ $kh->id }}</span></td>
+                        <td><span data-field="ten">{{ $kh->ten }}</span></td>
+                        <td><span data-field="username">{{ $kh->username }}</span></td>
+                        <td><span data-field="sdt">{{ $kh->sdt }}</span></td>
+                        <td><span data-field="diachi">{{ $kh->diachi }}</span></td>
+                        <td><span data-field="mail">{{ $kh->mail }}</span></td>
+                        <td>{{ $kh->created_at ? $kh->created_at->format('d/m/Y H:i') : '' }}</td>
+                        <td>{{ $kh->updated_at ? $kh->updated_at->format('d/m/Y H:i') : '' }}</td>
                         <td>
-                            <img src="{{ asset('image/delete.png') }}" onclick="deleteclk(this);" data-toggle="modal" data-target="#exampleModalCenter">
-                            <img src="{{ asset('image/edit.png') }}" onclick="Editdatas(this);"data-toggle="modal" data-target="#myModal4">
+                            <button class="btn btn-sm btn-danger" onclick="deleteCustomer(this)" 
+                                    data-toggle="modal" data-target="#deleteModal">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                            <button class="btn btn-sm btn-primary" onclick="editCustomer(this)" 
+                                    data-toggle="modal" data-target="#editModal">
+                                <i class="fas fa-edit"></i>
+                            </button>
                         </td>
-                        </tr\>
+                    </tr>
                     @endforeach
-                    </tbody>
-                </table>
-                </div>
-            </div>
-            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-          </div>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+</div>
 @endsection
+
 @section('model')
-	<div class="modal fade" id="myModal4">
-          <div class="modal-dialog">
-              <div class="modal-content">
-              <div style="background-color: white;margin: auto;width: 600px;" id="editkh">
-                <form action="{{ route('adminsqlkhachhang/editkh')}}" method="post" >
-                <button type="button" class="close mr-2" data-dismiss="modal" onclick="CloseEditdatasDialog();">&times;</button>
-                <table style="width:100%;">
-                  <tr>
-                    <td colspan="2" class="text-center font-weight-bold p-3"><h3>Edit Khách Hàng</h3></td>
-                  </tr>
-                  <tr style="display: none;">
-                    <td>
-                      <div class="form-group pl-3 pr-3">
-                      <label>Mã khách hàng:</label>
-                      <input type="text" name="txtidkh" class="form-control" id="txtidkh" disabled="">
+<!-- Edit Customer Modal -->
+<div class="modal fade" id="editModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Sửa thông tin khách hàng</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <form id="editForm">
+                <div class="modal-body">
+                    @csrf
+                    <input type="hidden" id="customerId" name="id">
+                    
+                    <div class="form-group">
+                        <label>Tên khách hàng:</label>
+                        <input type="text" class="form-control" id="customerName" name="ten" required>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Username:</label>
+                                <input type="text" class="form-control" id="customerUsername" name="username" required>
+                            </div>
                         </div>
-                    </td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td colspan="2">
-                      <div class="form-group pl-3 pr-3">
-                      <label>Tên khách hàng:</label>
-                                  <input type="text" class="form-control" name="txttenkhachang" id="txttenkhachang" >
-                                  </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="form-group pl-3 pr-3">
-                      <label>UserName:</label>
-                      <input type="text" name="txtusername" class="form-control" id="txtusername">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Password:</label>
+                                <input type="password" class="form-control" id="customerPassword" name="password" 
+                                       placeholder="Để trống nếu không đổi">
+                            </div>
                         </div>
-                    </td>
-                    <td>
-                      <div class="form-group pl-3 pr-3">
-                      <label>PassWord:</label>
-                      <input type="text" name="txtpassword" class="form-control" id="txtpassword">
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Số điện thoại:</label>
+                                <input type="tel" class="form-control" id="customerPhone" name="sdt" required>
+                            </div>
                         </div>
-                    </td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>
-              <div class="form-group pl-3 pr-3">
-              <label>PhoneNumber:</label>
-              <input type="text" name="gia" class="form-control" id="txtphonenumber" >
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Email:</label>
+                                <input type="email" class="form-control" id="customerEmail" name="mail" required>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Địa chỉ:</label>
+                        <textarea class="form-control" id="customerAddress" name="diachi" rows="3" required></textarea>
+                    </div>
                 </div>
-            </td>
-            <td>
-              <div class="form-group pl-3 pr-3">
-              <label>Địa chỉ:</label>
-              <input type="text" name="txtdiachi" id="txtdiachi" class="form-control" >
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Cập nhật</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Xóa khách hàng</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
-            </td>
-            <td>
-              <div class="form-group pl-3 pr-3">
-              <label>Mail:</label>
-              <input type="text" name="txtmail" id="txtmail" class="form-control" >
+            <div class="modal-body">
+                Bạn có chắc chắn muốn xóa khách hàng này?
+                <input type="hidden" id="deleteCustomerId">
             </div>
-            </td>
-          </tr>
-        </table>
-      </form>
-      <div class="text-center">
-        <button class="btn btn-success m-3" style="width: 100px;" data-dismiss="modal" onclick="Updatesdatas(); return false;">Sửa</button>
-        <button class="btn btn-success m-3" style="width: 100px;" data-dismiss="modal" onclick="CloseEditdatasDialog();">Hủy</button>
-      </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="confirmDelete()">Xóa</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+            </div>
+        </div>
     </div>
-    </div>
-  </div>
-  </div>
-	{{-- model xóa khách hàng --}}
-	<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  	<div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Xóa Khách Hàng</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="CloseEditdatasDialog();">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Bạn có chắc chắn muốn xóa khách hàng này <label id="idkh" style="display: none;"></label> ?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" onclick="deletedatas(this);" >Xóa</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="CloseEditdatasDialog();">Hủy</button>
-      </div>
-    </div>
-  	</div>
-	</div>
+</div>
 @endsection
+
 @section('javascript')
 <script>
-      var row;
-      var id,hoten,username,phonenumber,address,mail,password;
-      function Updatesdatas(editButton) {
-            var url = "{{ route('adminsqlkhachhang/editkh')}}"; 
-            id=$("#txtidkh").val();
-            ten = $("#txttenkhachang").val();
-            username = $("#txtusername").val();
-            password=$("#txtpassword").val();
-            phonenumber = $("#txtphonenumber").val();
-            address = $("#txtdiachi").val();
-            mail = $("#txtmail").val();
-            $.ajax({
-                type: "POST",
-                url: url,
-                cache: false,
-                data:{
-                _token:'{{ csrf_token() }}',
-                type: 3,
-                id: id,
-                ten:ten,
-                username:username,
-                password:password,
-                sdt:phonenumber,
-                diachi:address,
-                mail:mail
-              },
-                success: function(dataResult){
-                dataResult = JSON.parse(dataResult);
-                     if(dataResult.statusCode)
-              {
-                  alert('Update success!');
-                            $("#lblid",row).text(id);
-                            $("#lblten",row).text(ten);
-                            $("#lblusername",row).text(username);
-                            $("#lblsdt",row).text(phonenumber);
-                            $("#lbldiachi",row).text(address);
-                            $("#lblmail",row).text(mail);
-                            row.removeClass("highlightRow");
-                            CloseEditdatasDialog();
-             }
-             else{
-                 alert("Internal Server Error");
-             }            
-          }
-        });
-            return false;
-        }
+let currentRow;
 
-      function deletedatas(editButton) {
-            var url = "{{ route('adminsqlkhachhang/deletekh')}}"; 
-            id=$("#idkh").text();
-            $.ajax({
-                type: "POST",
-                url: url,
-                cache: false,
-                data:{
-                _token:'{{ csrf_token() }}',
-                type: 3,
-                id: id
-                },
-                success: function(dataResult){
-                dataResult = JSON.parse(dataResult);
-                if(dataResult.statusCode)
-                {
-                alert('delete success!');
-                $('#exampleModalCenter').modal('hide');
-                row.removeClass("highlightRow");
-                $(row).remove();
-                      }
-                else {
-                alert('There is some error during delete');
-                row.removeClass("highlightRow");
-                      }
-                      }
-                      });
-                // return false;
+$(document).ready(function() {
+    // Edit form submission
+    $('#editForm').on('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = {
+            _token: '{{ csrf_token() }}',
+            type: 3,
+            id: $('#customerId').val(),
+            ten: $('#customerName').val(),
+            username: $('#customerUsername').val(),
+            password: $('#customerPassword').val(),
+            sdt: $('#customerPhone').val(),
+            diachi: $('#customerAddress').val(),
+            mail: $('#customerEmail').val()
+        };
+        
+        $.ajax({
+            url: "{{ route('adminsqlkhachhang/editkh') }}",
+            method: "POST",
+            data: formData,
+            success: function(response) {
+                const result = typeof response === 'string' ? JSON.parse(response) : response;
+                
+                if (result.statusCode) {
+                    alert('Cập nhật thành công!');
+                    updateRowData(currentRow, formData);
+                    $('#editModal').modal('hide');
+                } else {
+                    alert('Có lỗi xảy ra khi cập nhật!');
+                }
+            },
+            error: function() {
+                alert('Có lỗi xảy ra! Vui lòng thử lại.');
+            }
+        });
+    });
+});
+
+// Edit customer function
+function editCustomer(button) {
+    currentRow = $(button).closest('tr');
+    const data = extractRowData(currentRow);
+    
+    $('#customerId').val(data.id);
+    $('#customerName').val(data.ten);
+    $('#customerUsername').val(data.username);
+    $('#customerPhone').val(data.sdt);
+    $('#customerAddress').val(data.diachi);
+    $('#customerEmail').val(data.mail);
+    $('#customerPassword').val(''); // Clear password field
+    
+    currentRow.addClass('table-active');
+}
+
+// Delete customer function
+function deleteCustomer(button) {
+    currentRow = $(button).closest('tr');
+    const id = currentRow.find('[data-field="id"]').text();
+    $('#deleteCustomerId').val(id);
+    currentRow.addClass('table-active');
+}
+
+// Confirm delete
+function confirmDelete() {
+    const id = $('#deleteCustomerId').val();
+    
+    $.ajax({
+        url: "{{ route('adminsqlkhachhang/deletekh') }}",
+        method: "POST",
+        data: {
+            _token: '{{ csrf_token() }}',
+            type: 3,
+            id: id
+        },
+        success: function(response) {
+            const result = typeof response === 'string' ? JSON.parse(response) : response;
+            
+            if (result.statusCode) {
+                alert('Xóa thành công!');
+                currentRow.remove();
+                $('#deleteModal').modal('hide');
+            } else {
+                alert('Có lỗi xảy ra khi xóa!');
+            }
+        },
+        error: function() {
+            alert('Có lỗi xảy ra! Vui lòng thử lại.');
         }
-      function Editdatas(editButton) {
-            row = $(editButton).parent().parent();
-            id=$("#lblid",row).text();
-            ten = $("#lblten", row).text();
-            username = $("#lblusername", row).text();
-            phonenumber = $("#lblsdt",row).text();
-            address = $("#lbldiachi", row).text();
-            mail = $("#lblmail", row).text();
-            row.addClass("highlightRow");
-            DisplayEditdatasDialog();
-            return false;
-        }
-        function deleteclk(editButton){
-            row = $(editButton).parent().parent();
-            id = $("#lblid", row).text();
-            $("#idkh").text(id);
-            row.addClass("highlightRow");
-            return false;
-        }
-      function DisplayEditdatasDialog() {
-          $("#txtidkh").val(id);
-          $("#txttenkhachang").val(ten);
-          $("#txtusername").val(username);
-          $("#txtphonenumber").val(phonenumber);
-          $("#txtdiachi").val(address);
-          $("#txtmail").val(mail);
-      }
-      function CloseEditdatasDialog() {
-          $("#updatemodel").hide();
-          row.removeClass("highlightRow");
-      }
-    </script>
+    });
+}
+
+// Helper functions
+function extractRowData(row) {
+    return {
+        id: row.find('[data-field="id"]').text(),
+        ten: row.find('[data-field="ten"]').text(),
+        username: row.find('[data-field="username"]').text(),
+        sdt: row.find('[data-field="sdt"]').text(),
+        diachi: row.find('[data-field="diachi"]').text(),
+        mail: row.find('[data-field="mail"]').text()
+    };
+}
+
+function updateRowData(row, data) {
+    row.find('[data-field="ten"]').text(data.ten);
+    row.find('[data-field="username"]').text(data.username);
+    row.find('[data-field="sdt"]').text(data.sdt);
+    row.find('[data-field="diachi"]').text(data.diachi);
+    row.find('[data-field="mail"]').text(data.mail);
+}
+
+// Clean up on modal close
+$('.modal').on('hidden.bs.modal', function() {
+    if (currentRow) {
+        currentRow.removeClass('table-active');
+    }
+});
+</script>
 @endsection
