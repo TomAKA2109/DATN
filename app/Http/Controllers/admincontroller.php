@@ -128,7 +128,7 @@ class admincontroller extends Controller
 
 
     function kh_logout(){
-        Cookie::queue(Cookie::forget('khachhang_login'));
+        Auth::guard('customers')->logout();
         return redirect('home');
     }
     function qlkhachhang(){

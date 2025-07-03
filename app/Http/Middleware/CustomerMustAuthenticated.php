@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Auth;
 
 class CustomerMustAuthenticated
 {
@@ -17,8 +17,8 @@ class CustomerMustAuthenticated
      */
     public function handle(Request $request, Closure $next)
     {
-        $username = Cookie::get('khachhang_login');
-        if (!$username) {
+        $isAuthenticated = Auth::guard('customers')->check();
+        if (!$isAuthenticated) {
             return redirect()->route('kh_login');
         }
 

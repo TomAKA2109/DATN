@@ -10,11 +10,18 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class qlidonhangcontroller extends Controller
 {
     public function postCheckout(Request $req)
     {
+        $req->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'address' => 'required',
+            'phone' => 'required'
+        ]);
         $cart = Session::get('cart');
 
         if (!$cart || !is_object($cart)) {
@@ -26,12 +33,7 @@ class qlidonhangcontroller extends Controller
         }
 
         $dondathang = new dondathang();
-        $kh_login = Cookie::get('khachhang_login');
-        $khachhang = khachhang::where('username', $kh_login)->first();
-
-        if (!$khachhang) {
-            return redirect('kh_login')->with('error', 'Không tìm thấy thông tin khách hàng.');
-        }
+        $khachhang = Auth::guard('customers')->user();
 
         $dondathang->id_khachhang = $khachhang->id;
         $dondathang->tongtien = $cart->totalPrice;

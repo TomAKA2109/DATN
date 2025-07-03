@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Http\Request;
-use App\Models\slide as slides;
 use Illuminate\Support\Facades\DB;
 use App\Models\khachhang as khachhang;
 use App\Models\chitietsach;
@@ -13,13 +12,9 @@ use App\Models\loaisach as loaisach;
 use App\Models\nhaxuatban as nhaxuatban;
 use App\Models\sach as sach;
 use App\Models\Cart;
-// Removed duplicate 'use Session;' statement
-use App\demphantu;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Cookie;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class homecontroller extends Controller
 {
@@ -39,18 +34,13 @@ class homecontroller extends Controller
     }
 
     public function getThongTin(){
-        // Lấy thông tin người dùng từ cookie/session
-        $user = Cookie::get('khachhang_login'); // hoặc dùng Auth nếu có
-
-        // Truy vấn DB theo tên đăng nhập, ví dụ:
-        $khachhang = DB::table('khachhang')->where('username', $user)->first();
+        $khachhang = Auth::guard('customers')->user();
 
         return view('page.thongtin.thongtin', compact('khachhang'));
     }
 
     public function postCapNhatThongTin(Request $request){
-        $username = Cookie::get('khachhang_login');
-        $customer = khachhang::where('username', $username)->first();
+        $customer = Auth::guard('customers')->user();
         $request->validate([
             'ten' => 'required',
             'sdt' => 'required|unique:khachhang,sdt,'.$customer->id,
@@ -66,14 +56,9 @@ class homecontroller extends Controller
     }
 
     function getDonHang(){
-        $username = Cookie::get('khachhang_login');
-
-        if (!$username) {
-            return redirect()->route('kh_login')->with('error', 'Bạn cần đăng nhập để xem đơn hàng.');
-        }
 
         // Lấy id của khách hàng từ username
-        $khachhang = DB::table('khachhang')->where('username', $username)->first();
+        $khachhang = Auth::guard('customers')->user();
 
         if (!$khachhang) {
             return redirect()->route('kh_login')->with('error', 'Tài khoản không tồn tại.');
@@ -372,40 +357,8 @@ class homecontroller extends Controller
         $danhmuc=danhmuc::all();
         $loaisach=loaisach::all();
         $nxb=nhaxuatban::all();
-        return View('page.sanpham.checkout', compact('danhmuc', 'loaisach', 'nxb'));
-    }
-    function timkiem(Request $req) {
-        return 0;
-        // if ($req->has('query')) {
-        //     $querys = trim($req->input('query'));
-
-        //     // Nếu chuỗi tìm kiếm rỗng thì trả về output trống
-        //     if ($querys === '') {
-        //         return response()->json(['success' => '']);
-        //     }
-
-        //     $data = DB::table('sach')
-        //         ->where('tensach', 'LIKE', '%' . $querys)
-        //         ->orWhere('tensach', 'LIKE', $querys . '%')
-        //         ->get();
-
-        //     // Nếu không có kết quả tìm thấy
-        //     if ($data->isEmpty()) {
-        //         return response()->json(['success' => '']);
-        //     }
-
-        //     // Có kết quả → tạo HTML
-        //     $output = '<ul style="display:block;position:relative;background:white;z-index:1000;list-style-type: none;width:394px;">';
-        //     foreach ($data as $row) {
-        //         $output .= "<a href=\"sanpham/$row->id\"><li><img src=\"/image/anhsanpham/$row->anhbia\" style=\"width:50px;height:70px\">&nbsp;&nbsp;$row->tensach</li></a>";
-        //     }
-        //     $output .= '</ul>';
-
-        //     return response()->json(['success' => $output]);
-        // }
-
-        // // Nếu không có request query
-        // return response()->json(['success' => '']);
+        $customerInfo = khachhang::find(Auth::guard("customers")->user()->id);
+        return view('page.sanpham.checkout', compact('danhmuc', 'loaisach', 'nxb', 'customerInfo'));
     }
 
     function timkiem_key(Request $req) {

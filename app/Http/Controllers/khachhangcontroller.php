@@ -20,8 +20,7 @@ class khachhangcontroller extends Controller
             'username' => 'required',
             'password' => 'required'
         ]);
-        if (Auth::guard('customers')->attempt(['username' => $request->input('username'), 'password' => $request->input('password')])) {
-            Cookie::queue('khachhang_login', $request->input('username'), 30);
+        if (Auth::guard('customers')->attempt(['username' => $request->input('username'), 'password' => $request->input('password')], $request->input('remember_me'))) {
             return redirect('/home');
         }
         return redirect()->back()->with('message', 'Đăng nhập không thành công');
