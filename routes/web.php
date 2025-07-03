@@ -52,7 +52,7 @@ Route::post('/dangki', [khachhangcontroller::class, 'dangKy'])->name('dangki');
  */
 Route::group(['prefix' => 'admin','as'=>'admins'], function() {
    	Route::get('/login',[admincontroller::class,'getlogin'])->name('getlogin');
-    Route::post('/admin',[admincontroller::class,'postlogin'])->name('admin');
+    Route::post('/login',[admincontroller::class,'postlogin'])->name('admin');
     Route::get('/qlkhachhang1/addusers',[admincontroller::class,'addkhachhang1'])->name('qlkhachhang1/addusers');
     Route::post('/qlkhachhang1/postusers',[admincontroller::class,'postkhachhang1'])->name('qlkhachhang1/postusers');
     Route::get('/qlkhachhang',[admincontroller::class,'qlkhachhang'])->name('qlkhachhang');
@@ -77,8 +77,9 @@ Route::group(['prefix' => 'admin','as'=>'admins'], function() {
     Route::post('/qlchitietsach/insert/post',[admincontroller::class,'qlchitietsach_insert_post'])->name('qlchitietsach/insert/post');
     Route::get('/qlchitietsach/edit/{id}',[admincontroller::class,'qlchitietsach_edit'])->name('qlchitietsach.edit');
     Route::post('/qlchitietsach/edit/post/{id}',[admincontroller::class,'qlchitietsach_edit_post'])->name('qlchitietsach.edit.post');
-
-
+    Route::get("*", function() {
+        return redirect('/login');
+    });
 });
 Route::get('reset-session', function() {
     session()->forget('cart');
