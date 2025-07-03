@@ -40,7 +40,7 @@ Route::get('add-to-card/{id}', [homeController::class, 'getAddToCart'])->name('t
 Route::get('delete-cart/{id}',[homecontroller::class,'getDelItemCart'])->name('xoagiohang');
 Route::get('update-cart/{id}-{qty}',[homecontroller::class,'getUpdateItemCart'])->name('capnhatgiohang');
 Route::get('dat-hang/', [homeController::class, 'getCheckout'])->name('getdathang');
-Route::post('dat-hang/', [QliDonHangController::class, 'postCheckout'])->name('postdathang');
+Route::post('dat-hang/', [QliDonHangController::class, 'postCheckout'])->middleware([CustomerMustAuthenticated::class])->name('postdathang');
 Route::post('/timkiem/',['as'=>'timkiem', 'uses'=>[homecontroller::class,'timkiem']]);
 Route::get('/searching', [homecontroller::class, 'timkiem_key'])->name('timkiem_key');
 Route::get('/dangki', [khachhangcontroller::class, 'hienThiDangKy'])->name('dangki');

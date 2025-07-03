@@ -55,15 +55,15 @@
                                 <h4>Đặt hàng</h4>
                                 <div class="mt-2 mb-2">
                                     <div>
-                                        <input type="radio" class="address" name="customer_info" value="new_customer" checked/> Sử dụng thông tin mới
+                                        <input type="radio" class="address" name="customer_info" value="new" checked/> Sử dụng thông tin mới
                                     </div>
                                     <div>
-                                        <input type="radio" class="address" name="customer_info" value="existing_customer"/> Sử dụng thông tin có sẵn
+                                        <input type="radio" class="address" name="customer_info" value="existing"/> Sử dụng thông tin có sẵn
                                     </div>
                                 </div>
 
                                 {{-- Form mới --}}
-                                <table class="w-100 customer_info new_customer">
+                                <table class="w-100 customer_info new">
                                     <tr>
                                         <td class="first"><label for="name">Họ tên (*)</label></td>
                                         <td><input type="text" id="name" name="name" required class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"></td>
@@ -76,8 +76,8 @@
                                     <tr>
                                         <td class="first"><label>Giới tính </label></td>
                                         <td>
-                                            <input type="radio" class="radio" name="gender_new" value="nam" checked style="width: 10%"><span style="margin-right: 10%">Nam</span>
-                                            <input type="radio" class="input-radio" name="gender_new" value="nữ" style="width: 10%"><span>Nữ</span>
+                                            <input type="radio" class="radio" name="gender" value="nam" checked style="width: 10%"><span style="margin-right: 10%">Nam</span>
+                                            <input type="radio" class="input-radio" name="gender" value="nữ" style="width: 10%"><span>Nữ</span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -91,7 +91,7 @@
                                     </tr>
                                     <tr>
                                         <td class="first"><label for="adress">Địa chỉ (*)</label></td>
-                                        <td><input type="text" name="address" id="adress"  required class="form-control"></td>
+                                        <td><input type="text" name="address" id="address"  required class="form-control"></td>
                                         @error('address')
                                             <div class="invalid-feedback">
                                                 {{ $errors->first('address') }}
@@ -101,57 +101,6 @@
                                     <tr>
                                         <td class="first"><label for="phone">Điện thoại (*)</label></td>
                                         <td><input type="text" name="phone" id="phone" required class="form-control"></td>
-                                        @error('phone')
-                                            <div class="invalid-feedback">
-                                                {{ $errors->first('phone') }}
-                                            </div>
-                                        @enderror
-                                    </tr>
-                                    <tr>
-                                        <td class="first"><label for="notes">Ghi chú</label></td>
-                                        <td><textarea id="notes" name="notes" class="form-control" rows="7" style="height: 100px; line-height:1.3"></textarea></td>
-                                    </tr>
-                                </table>
-
-                                {{-- Form có sẵn --}}
-                                <table class="w-100 customer_info existing_customer d-none">
-                                    <tr>
-                                        <td class="first"><label for="name">Họ tên (*)</label></td>
-                                        <td><input type="text" id="name" name="name" value="{{ $customerInfo->ten }}" required class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"></td>
-                                        @error('name')
-                                            <div class="invalid-feedback">
-                                                {{ $errors->first('name') }}
-                                            </div>
-                                        @enderror
-                                    </tr>
-                                    <tr>
-                                        <td class="first"><label>Giới tính </label></td>
-                                        <td>
-                                            <input type="radio" class="radio" name="gender_existing" value="nam" checked style="width: 10%"><span style="margin-right: 10%">Nam</span>
-                                            <input type="radio" class="input-radio" name="gender_existing" value="nữ" style="width: 10%"><span>Nữ</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="first"><label for="email">Email (*)</label></td>
-                                        <td><input type="email" name="email" placeholder="example@gmail.com" value="{{ $customerInfo->mail }}" required class="form-control"></td>
-                                        @error('email')
-                                            <div class="invalid-feedback">
-                                                {{ $errors->first('email') }}
-                                            </div>
-                                        @enderror
-                                    </tr>
-                                    <tr>
-                                        <td class="first"><label for="adress">Địa chỉ (*)</label></td>
-                                        <td><input type="text" name="address" id="adress" value="{{ $customerInfo->diachi }}" required class="form-control"></td>
-                                        @error('address')
-                                            <div class="invalid-feedback">
-                                                {{ $errors->first('address') }}
-                                            </div>
-                                        @enderror
-                                    </tr>
-                                    <tr>
-                                        <td class="first"><label for="phone">Điện thoại (*)</label></td>
-                                        <td><input type="text" name="phone" id="phone" required class="form-control" value="{{ $customerInfo->sdt }}"></td>
                                         @error('phone')
                                             <div class="invalid-feedback">
                                                 {{ $errors->first('phone') }}
@@ -248,8 +197,17 @@
     <script>
         $(function() {
             $(".address").change(function() {
-                $(".customer_info").addClass("d-none");
-                $("."+$(this).val()).removeClass("d-none");
+                if ($(this).val() == 'existing') {
+                    $("input[name='name']").val("{{ Auth::guard('customers')->user()->ten }}");
+                    $("input[name='email']").val("{{ Auth::guard('customers')->user()->mail }}");
+                    $("input[name='address']").val("{{ Auth::guard('customers')->user()->diachi }}");
+                    $("input[name='phone']").val("{{ Auth::guard('customers')->user()->sdt }}");
+                } else {
+                    $("input[name='name']").val("");
+                    $("input[name='email']").val("");
+                    $("input[name='address']").val("");
+                    $("input[name='phone']").val("");
+                }
             })
         })
     </script>
