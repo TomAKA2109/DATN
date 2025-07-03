@@ -53,6 +53,7 @@ Route::post('/dangki', [khachhangcontroller::class, 'dangKy'])->name('dangki');
 Route::group(['prefix' => 'admin','as'=>'admins'], function() {
    	Route::get('/login',[admincontroller::class,'getlogin'])->name('getlogin');
     Route::post('/login',[admincontroller::class,'postlogin'])->name('admin');
+    Route::post('/logout',[admincontroller::class,'logout'])->name('admin');
     Route::get('/qlkhachhang1/addusers',[admincontroller::class,'addkhachhang1'])->name('qlkhachhang1/addusers');
     Route::post('/qlkhachhang1/postusers',[admincontroller::class,'postkhachhang1'])->name('qlkhachhang1/postusers');
     Route::get('/qlkhachhang',[admincontroller::class,'qlkhachhang'])->name('qlkhachhang');

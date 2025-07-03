@@ -53,6 +53,13 @@ return [
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
         ],
 
+        'category' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/categories'),
+            'url' => 'http://127.0.0.1:8000/storage/categories',
+            'visibility' => 'public',
+        ]
+
     ],
 
     /*

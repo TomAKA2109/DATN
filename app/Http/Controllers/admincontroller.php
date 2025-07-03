@@ -208,7 +208,10 @@ class admincontroller extends Controller
        return view('admin.qlchitietsach.edit', compact('sachs', 'chitietsach'));
     }
 
-
+    public function logout() {
+        Auth::guard('admin')->logout();
+        return redirect('/admin/login');
+    }
 
     function qlchitietsach_edit_post(Request $request, $id){
         $sach = sach::find(['id' => $id]);
