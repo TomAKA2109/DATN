@@ -62,11 +62,11 @@ class admincontroller extends Controller
         return View('page.danhmucsanpham.sachmoi');
     }
 
-    function postlogin(Request $request){
+    public function postlogin(Request $request){
         $email = $request->input('email');
         $password = $request->input('password');
         if (Auth::guard('admin')->attempt(['email' => $email, 'password' => $password])) {
-            return redirect('/qlkhachhang');
+            return redirect('/admin/qlkhachhang');
         }
         return redirect('/admin/login')->with('message', 'Đăng nhập thất bại');
     }

@@ -29,11 +29,11 @@
                                         <form method="POST" action="/admin/login">
                                             @csrf
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" />
+                                                <input class="form-control" id="inputEmail" type="email" name='email' placeholder="name@example.com" />
                                                 <label for="inputEmail">Email</label>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputPassword" type="password" placeholder="Password" />
+                                                <input class="form-control" id="inputPassword" type="password" name='password' placeholder="Password" />
                                                 <label for="inputPassword">Mật khẩu</label>
                                             </div>
                                             <div class="form-check mb-3">
