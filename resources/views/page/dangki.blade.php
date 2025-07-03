@@ -87,11 +87,7 @@
 </head>
 <body>
 	<div class="container">
-        @if(Session::has('message'))
-            <script>
-                alert("{!! addslashes(Session::get('message')) !!}");
-            </script>
-        @endif
+
     <div class="row" style="margin-top: 100px;">
         <div class="col-sm-6 col-md-4 col-md-offset-4">
             <h1 class="text-center login-title">Đăng kí thành viên</h1>
@@ -135,7 +131,7 @@
                 <button class="btn btn-lg btn-primary btn-block" type="submit">
                     Đăng kí</button>
                 <label class="checkbox pull-left">
-                    <input type="checkbox" value="remember-me" name="remember_me"/>
+                    <input type="checkbox" value="remember-me" name="remember_me" checked/>
                     Lưu mật khẩu
                 </label>
                 <a href="#" class="pull-right need-help">Trợ giúp? </a><span class="clearfix"></span>

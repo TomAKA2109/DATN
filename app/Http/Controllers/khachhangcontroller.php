@@ -24,6 +24,7 @@ class khachhangcontroller extends Controller
             Cookie::queue('khachhang_login', $request->input('username'), 30);
             return redirect('/home');
         }
+        return redirect()->back()->with('message', 'Đăng nhập không thành công');
     }
 
     public function hienThiDangKy()
