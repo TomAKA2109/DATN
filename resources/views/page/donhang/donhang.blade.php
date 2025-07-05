@@ -10,7 +10,7 @@
     <div class="row">
 
         {{-- Nội dung chính --}}
-        <div class="col-md-10">
+        <div class="col-md-12">
             <h3 class="mb-4">Đơn hàng của tôi</h3>
 
             <table class="table table-bordered w-100">

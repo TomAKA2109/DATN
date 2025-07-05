@@ -134,7 +134,7 @@
 
 #module_ProductRelated .blockcontent
 {
-	
+
 }
 
 .product_view_contener .showleft
@@ -451,7 +451,7 @@
 	margin:5px 0;
 }
 
-#module_ProductFieds .fields 
+#module_ProductFieds .fields
 {
 	border:1px solid #ddd;
 	border-top:none;
@@ -476,11 +476,11 @@
 
 .row0{
 	background-color:#fff;
-		
+
 }
 
 .row1{
-	background-color:#f2f2f2;	
+	background-color:#f2f2f2;
 }
 
 .product_cart .shoppingtool
@@ -960,7 +960,7 @@ select#order
 
 .plis span
 {
-	color:#00cc66;	
+	color:#00cc66;
 }
 
 .product_vertical_contener .productprice,.product_vertical_contener .publishing
@@ -983,7 +983,7 @@ select#order
 	margin:5px 20px 0 0;
 }
 
-.product_vertical_contener .prices 
+.product_vertical_contener .prices
 {
 	color:#E47911;
 }
@@ -1203,7 +1203,7 @@ select#order
 	margin:5px 20px 0 0;
 }
 
-.product_del_contener .prices 
+.product_del_contener .prices
 {
 	color:#E47911;
 }
@@ -1368,7 +1368,7 @@ div.pagesright .sorts
 {
 	width:120px;
 	height:120px;
-	overflow:hidden;	
+	overflow:hidden;
 }
 
 .frontcategories .title
@@ -1509,7 +1509,7 @@ li.active
 {
 	color:#00cc66;
 }
-.list_btn {	
+.list_btn {
 	z-index: 1;
 }
 
@@ -1611,7 +1611,17 @@ li.active
 	color:#fff;
 }
 
-input[type=text] {
+input[type=text],input[type='email'] {
+	font-size: 13px;
+	border: 1px solid #D8D3D0;
+	border-radius: 2px 2px 2px 2px;
+	margin: 0;
+	color: #858585;
+	height: 40px;
+	padding: 10px;
+}
+
+textarea{
 	font-size: 13px;
 	border: 1px solid #D8D3D0;
 	border-radius: 2px 2px 2px 2px;
@@ -1647,7 +1657,7 @@ input[type="checkbox"], input[type="radio"]
 
 #module_sameAuthor .products .image img, #module_AlsoBought .products .image img
 {
-	
+
 	width: 96px !important;
 	height: 135px !important;
 }
