@@ -39,8 +39,7 @@ class admincontroller extends Controller
         $khachhang->save();
 
         $khachhang = khachhang::all();
-   		return View('admin.qlkhachhang', compact('khachhang'));
-
+        return View('admin.qlkhachhang', compact('khachhang'));
     }
 
     function postkhachhang(Request $req){
@@ -58,77 +57,23 @@ class admincontroller extends Controller
     function getloaisach(){
         return View('admin.loaisach');
     }
-   function sachmoi(){
-    return View('page.danhmucsanpham.sachmoi');
-   }
-    function postlogin(Request $request){
-    	// $username=$request->username;
-    	// $password=$request->pass;
-        // $khachhang_login=
-        // $minutes = 30;
-        // $login=['username'=>$username,'password'=>$password,'maquyen'=>1];
-        // $khachhang = khachhang::all();
-        // if(\Auth::attempt($login)){
-        //     $khachhang = khachhang::all();
-        //     Cookie::queue(Cookie::make('name',$username, $minutes));
-   		//     return View('admin.qlkhachhang', compact('khachhang'));
-        // }
-        // else if(count($khachhang_login)>0){
-        //     if (count($khachhang_login) > 0 && isset($khachhang_login[0]->password) && \Hash::check($password, $khachhang_login[0]->password)) {
-        //         Cookie::queue(Cookie::make('khachhang_login',$username, 60));
-        //         return redirect('home');
-        //     }
 
-        //     else{
-        //         Session::flash('message', "Vui lòng kiểm tra lại tài khoản mật khẩu!");
-        //         return back();
-        //     }
-        // }
-        // else
-        // {
-        //     Session::flash('message', "Vui lòng kiểm tra lại tài khoản mật khẩu!");
-        //         return back();
-        // }
+    function sachmoi(){
+        return View('page.danhmucsanpham.sachmoi');
     }
 
-    function postlogin1(Request $request){
-    //     $this->validate($request,[
-    //         'username'=>'min:10',
-    //     ],
-    //     ['username.min'=>"min length is 10"]
-    // );
-    	$username=$request->username;
-    	$password=$request->pass;
-        $khachhang_login=DB::table('khachhang')->where('username','=',$username)->get();
-        $minutes = 30;
-        $login=['username'=>$username,'password'=>$password,'maquyen'=>1];
-        $khachhang = khachhang::all();
-    	if(\Auth::attempt($login)){
-            $khachhang = khachhang::all();
-              Cookie::queue(Cookie::make('name',$username, $minutes));
-   			return View('admin.qlkhachhang', compact('khachhang'));
-    	}
-    	elseif(count($khachhang_login)>0){
-            if (count($khachhang_login) > 0 && isset($khachhang_login[0]->password) && \Hash::check($password, $khachhang_login[0]->password)) {
-                Cookie::queue(Cookie::make('khachhang_login',$username, 60));
-                return redirect('home');
-            }
-
-            else{
-                Session::flash('message', "Vui lòng kiểm tra lại tài khoản mật khẩu!");
-                return back();
-            }
+    public function postlogin(Request $request){
+        $email = $request->input('email');
+        $password = $request->input('password');
+        if (Auth::guard('admin')->attempt(['email' => $email, 'password' => $password])) {
+            return redirect('/admin/qlkhachhang');
         }
-        else{
-             Session::flash('message', "Vui lòng kiểm tra lại tài khoản mật khẩu!");
-                return back();
-        }
+        return redirect('/admin/login')->with('message', 'Đăng nhập thất bại');
     }
-
 
 
     function kh_logout(){
-        Cookie::queue(Cookie::forget('khachhang_login'));
+        Auth::guard('customers')->logout();
         return redirect('home');
     }
     function qlkhachhang(){
@@ -141,7 +86,6 @@ class admincontroller extends Controller
         return View('admin.qldonhang', compact('donhang'));
         // return 1;
     }
-
 
     function editkhachhang(Request $req){
             $id=$req->id;
@@ -264,7 +208,10 @@ class admincontroller extends Controller
        return view('admin.qlchitietsach.edit', compact('sachs', 'chitietsach'));
     }
 
-
+    public function logout() {
+        Auth::guard('admin')->logout();
+        return redirect('/admin/login');
+    }
 
     function qlchitietsach_edit_post(Request $request, $id){
         $sach = sach::find(['id' => $id]);

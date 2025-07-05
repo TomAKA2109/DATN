@@ -5,7 +5,7 @@
 .inner-header {
 padding:20px 0;
 width: 1140px;
-margin:auto;	
+margin:auto;
 }
 .clearfix{
 	clear: both;
@@ -54,12 +54,6 @@ background-color:#f8f8f8;
 padding:0 40px;
 border-top:1px solid #e8e8e8;
 border-bottom:1px solid #e8e8e8
-}
-
-.your-order-head h5 {
-font-size:24px;
-color:#484747;
-line-height:55px
 }
 
 .your-order-body {

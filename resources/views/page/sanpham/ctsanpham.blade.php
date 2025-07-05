@@ -233,7 +233,7 @@
         </ul>
     </h3>
     <a name="comment"></a>
-    @if (!Cookie::get('khachhang_login'))
+    @if (!Auth::guard('customers')->check())
         <div>
             Vui lòng <a href='' title='đăng nhập'>đăng nhập</a> để viết nhận xét
         </div>

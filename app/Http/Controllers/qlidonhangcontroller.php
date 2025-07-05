@@ -3,45 +3,41 @@
 namespace App\Http\Controllers;
 use App\Models\chitietdondathang;
 use App\Models\dondathang;
-use App\Models\danhmuc;
-use App\Models\khachhang;
 use App\Models\sach;
-use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class qlidonhangcontroller extends Controller
 {
     public function postCheckout(Request $req)
     {
+        $req->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'address' => 'required',
+            'phone' => 'required'
+        ]);
+
         $cart = Session::get('cart');
 
         if (!$cart || !is_object($cart)) {
             return redirect()->back()->with('error', 'Giỏ hàng trống hoặc không hợp lệ.');
         }
 
-        if (!$req->hasCookie('khachhang_login')) {
-            return redirect('kh_login');
-        }
-
         $dondathang = new dondathang();
-        $kh_login = Cookie::get('khachhang_login');
-        $khachhang = khachhang::where('username', $kh_login)->first();
 
-        if (!$khachhang) {
-            return redirect('kh_login')->with('error', 'Không tìm thấy thông tin khách hàng.');
-        }
-
-        $dondathang->id_khachhang = $khachhang->id;
+        $dondathang->id_khachhang = Auth::guard('customers')->user()->id;
         $dondathang->tongtien = $cart->totalPrice;
         $dondathang->phuongthucthanhtoan = $req->payment_method;
-        $dondathang->hoten = $req->name;
-        $dondathang->gioitinh = $req->gender;
-        $dondathang->email = $req->email;
-        $dondathang->diachi = $req->address;
-        $dondathang->sodienthoai = $req->phone;
-        $dondathang->ghichu = $req->notes;
+
+        $dondathang->hoten = $req->input('name');
+        $dondathang->gioitinh = $req->input('gender');
+        $dondathang->email = $req->input('email');
+        $dondathang->diachi = $req->input('address');
+        $dondathang->sodienthoai = $req->input('phone');
+        $dondathang->ghichu = $req->input('notes');
         $dondathang->save();
 
         foreach ($cart->items as $carts) {

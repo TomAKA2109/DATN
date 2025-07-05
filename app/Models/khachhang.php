@@ -8,7 +8,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class khachhang extends Authenticatable
 {
     protected $table='khachhang';
+
     public $timestamps = true;
+
     public $attributes = [
         'ten' => '',
         'sdt' => '',

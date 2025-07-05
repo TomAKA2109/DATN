@@ -72,7 +72,7 @@ Thông tin cá nhân
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="phone">Số điện thoại</label>
-                                    <input type="text" class="form-control  " id="phone" name="sdt" value="{{ old('sdt', $khachhang->sdt) }}" placeholder="Số điện thoại">
+                                    <input type="text" class="form-control {{ $errors->has('sdt') ? 'is-invalid' : '' }}" id="phone" name="sdt" value="{{ $khachhang->sdt }}" placeholder="Số điện thoại">
                                     @error('sdt')
                                         <div class="invalid-feedback">
                                             {{ $errors->first('sdt') }}
