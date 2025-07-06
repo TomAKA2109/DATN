@@ -33,7 +33,7 @@
         <li class="breadcrumb-item">
             <a href="#">Chi tiết sách</a>
         </li>
-        <li class="breadcrumb-item active">Thêm chi tiết</li>
+        <li class="breadcrumb-item active">Thêm mới chi tiết</li>
     </ol>
 @endsection
 @section('table')
@@ -44,23 +44,21 @@
                 <tr>
                     <td colspan="2">
                         <center>
-                            <h2>Sửa thông tin chi tiết sản phẩm</h2>
+                            <h2>Sửa thông tin sách</h2>
                         </center>
                     </td>
                 </tr>
                 <tr>
-                    <td class="first_td"><label>Tên sách:</label></td>
-                    <td class="second_td">{{ $book->tensach }}</td>
-                </tr>
-                <tr>
                     <td class="first_td"><label>Ngôn ngữ:</label></td>
-                    <td class="second_td"><select name="ngonngu"style="width: 820px;height: 40px;">
+                    <td class="second_td">
+                        <select name="ngonngu"style="width: 820px;height: 40px;">
                             @foreach ($ngonngu as $tenngonngu)
                                 <option value="{{ $tenngonngu->id }}">
                                     {{ $tenngonngu->ten }}
                                 </option>
                             @endforeach
-                        </select></td>
+                        </select>
+                    </td>
                 </tr>
                 <tr>
                     <td class="first_td"><label>Số trang:</label></td>

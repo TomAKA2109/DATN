@@ -78,18 +78,17 @@ Route::group(['prefix' => 'admin','as'=>'admins'], function() {
         Route::post('/qldanhmuc/insert',[qldanhmuccontroller::class,'qldanhmuc_insert'])->name('qldanhmuc/insert');
         Route::post('/qldanhmuc/update',[qldanhmuccontroller::class,'qldanhmuc_update'])->name('qldanhmuc/update');
         Route::post('/qldanhmuc/delete/',[qldanhmuccontroller::class,'qldanhmuc_delete'])->name('qldanhmuc/delete');
+
         Route::get('/qldondathang', [qlidonhangcontroller::class, 'qldondathang'])->name('qldondathang');
         Route::post('/qldondathangs/delete',[qlidonhangcontroller::class,'qldonhang_delete'])->name('delete_donhang');
         Route::get('/qldondathang/{id_donhang}',[qlidonhangcontroller::class,'qlchitietdonhang'])->name('chitietdonhang');
         Route::post('/qldondathang/delete',[qlidonhangcontroller::class,'qlchitietdonhang_delete'])->name('chitietdonhang/delete');
+
         Route::get('/qlchitietsach',[admincontroller::class,'qlchitietsach'])->name('qlchitietsach');
         Route::get('/qlchitietsach/insert',[admincontroller::class,'qlchitietsach_insert'])->name('qlchitietsach/insert');
         Route::post('/qlchitietsach/insert/post',[admincontroller::class,'qlchitietsach_insert_post'])->name('qlchitietsach/insert/post');
-        Route::get('/qlchitietsach/edit/{id}',[admincontroller::class,'qlchitietsach_edit'])->name('qlchitietsach.edit');
-        Route::post('/qlchitietsach/edit/post/{id}',[admincontroller::class,'qlchitietsach_edit_post'])->name('qlchitietsach.edit.post');
-        Route::get("*", function() {
-            return redirect('/login');
-        });
+        Route::get('/qlchitietsach/{id}/edit',[admincontroller::class,'qlchitietsach_edit'])->name('qlchitietsach.edit');
+        Route::put('/qlchitietsach/{id}/',[admincontroller::class,'qlchitietsach_update'])->name('qlchitietsach.edit.post');
     });
 });
 

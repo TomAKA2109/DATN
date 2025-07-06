@@ -204,12 +204,15 @@ class admincontroller extends Controller
         $sach=sach::find($id);
         $sach->hidden=1;
         $sach->save();
+        $chitietsach = chitietsach::findOrFail($id);
+        $chitietsach->hidden = 1;
+        $chitietsach->save();
         return response()->json([
             'success'   => 'Delete Successfully' ,
         ]);
     }
     function qlchitietsach(){
-        $chitietsach=chitietsach::all();
+        $chitietsach=chitietsach::where(['hidden' => 0])->get();
         $sachs = sach::with( 'chitietsach')->get();
         $ngonngu = ngonngu::all();
         $_loaisach = loaisach::all();
@@ -219,7 +222,7 @@ class admincontroller extends Controller
     function qlchitietsach_insert(){
         $sach = sach::all();
         $ngonngu = ngonngu::all();
-        return view('admin.chitietsach_add', compact('sach', 'ngonngu'));
+        return view('admin.qlchitietsach.add', compact('sach', 'ngonngu'));
     }
     function qlchitietsach_insert_post(Request $req){
         $chitietsach = new chitietsach();
@@ -236,9 +239,10 @@ class admincontroller extends Controller
     }
 
     function qlchitietsach_edit($id){
-        $chitietsach=chitietsach::all();
-        $sachs = sach::findOrFail($id);
-        return view('admin.qlchitietsach.edit', compact('sachs', 'chitietsach'));
+        $chitietsach=chitietsach::where(['masach' => $id])->first();
+        $book = sach::findOrFail($id);
+        $ngonngu = ngonngu::all();
+        return view('admin.qlchitietsach.edit', compact('book', 'chitietsach', 'ngonngu'));
     }
 
     public function logout() {

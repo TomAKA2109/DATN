@@ -11,4 +11,8 @@ class chitietsach extends Model
 
     public $incrementing = false; // nếu masach không phải kiểu số tự tăng
     protected $keyType = 'string';
+
+    public function ngonngu() {
+        return $this->hasOne(ngonngu::class, 'id', 'mangonngu');
+    }
 }

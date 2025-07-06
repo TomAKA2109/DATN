@@ -21,4 +21,5 @@ class sach extends Model
     {
         return $this->hasOne(chitietsach::class, 'masach', 'id')->withDefault();
     }
+
 }
