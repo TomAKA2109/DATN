@@ -71,7 +71,6 @@
 @endsection
 
 @section('model')
-<<<<<<< HEAD
 	<div class="modal fade" id="insertmodal">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -84,96 +83,6 @@
                             <button class="btn btn-default m-3" style="width: 100px;" data-dismiss="modal">Hủy</button>
                         </div>
                     </form>
-=======
-<!-- Add Book Modal -->
-<div class="modal fade" id="insertmodal" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Thêm sản phẩm</h5>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <form action="{{ route('adminsqlsach/insert') }}" method="post" enctype="multipart/form-data" id="addForm">
-                <div class="modal-body">
-                    @csrf
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Loại sách:</label>
-                                <select name="loaisach" class="form-control" required>
-                                    @foreach($_loaisach as $loaisach)
-                                    <option value="{{ $loaisach->id }}">{{ $loaisach->tenloai }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Nhà xuất bản:</label>
-                                <select name="nxb" class="form-control" required>
-                                    @foreach($_nhaxuatban as $nhaxuatban)
-                                    <option value="{{ $nhaxuatban->id }}">{{ $nhaxuatban->tennhaxuatban }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Tên sách:</label>
-                        <input type="text" class="form-control" name="tensach" placeholder="Tên sách" required>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Tác giả:</label>
-                                <input type="text" class="form-control" name="tacgia" placeholder="Tác giả" required>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Số lượng:</label>
-                                <input type="number" class="form-control" name="soluong" placeholder="Số lượng" min="0" required>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Đơn giá:</label>
-                                <input type="number" class="form-control" name="dongia" placeholder="Đơn giá" min="0" required>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Khuyến mãi (%):</label>
-                                <input type="number" class="form-control" name="khuyenmai" placeholder="Khuyến mãi" min="0" max="100">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Tập:</label>
-                                <input type="number" class="form-control" name="tap" placeholder="Tập số" min="0">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Số tập:</label>
-                                <input type="number" class="form-control" name="sotap" placeholder="Số tập" min="0">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Ảnh bìa:</label>
-                        <input type="file" name="select_file" class="form-control" accept="image/*">
-                    </div>
->>>>>>> 595ccbe1663a52461bf6cf0e62b5175ecd084eff
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-success">Thêm</button>
@@ -309,7 +218,6 @@
             </div>
         </div>
     </div>
-<<<<<<< HEAD
     <div class="modal fade" id="update_sach">
         <div class="modal-dialog">
             <div class="modal-content" >
@@ -346,14 +254,10 @@
     </div>
   	</div>
 	</div>
-=======
-</div>
->>>>>>> 595ccbe1663a52461bf6cf0e62b5175ecd084eff
 @endsection
 
 @section('javascript')
 <script>
-<<<<<<< HEAD
       var row;
       var id,loaisach,nhaxuatban,tensach,soluong,dongia,luotxem,luotmua,khuyenmai,tap,sotap,anhbia,files;
         $(document).ready(function(){
@@ -373,46 +277,6 @@
                 cache: false,
                 processData: false,
                 success:function(data) {
-=======
-let currentRow;
-
-// Form submissions
-$(document).ready(function() {
-    // Add form
-    $('#addForm').on('submit', function(e) {
-        e.preventDefault();
-        $.ajax({
-            url: "{{ route('adminsqlsach/insert') }}",
-            method: "POST",
-            data: new FormData(this),
-            dataType: 'JSON',
-            contentType: false,
-            cache: false,
-            processData: false,
-            success: function(data) {
-                location.reload();
-            },
-            error: function() {
-                alert('Có lỗi xảy ra khi thêm sách');
-            }
-        });
-    });
-
-    // Edit form
-    $('#editForm').on('submit', function(e) {
-        e.preventDefault();
-        $.ajax({
-            url: "{{ url('admin/qlsach/update') }}",
-            method: "POST",
-            data: new FormData(this),
-            dataType: 'JSON',
-            contentType: false,
-            cache: false,
-            processData: false,
-            success: function(data) {
-                if (data.ok) {
-                    alert(data.ok);
->>>>>>> 595ccbe1663a52461bf6cf0e62b5175ecd084eff
                     location.reload();
                 },
                 error: function (err) {
@@ -451,10 +315,7 @@ function editBook(button) {
     setSelectByText('#editNXB', data.tennhaxuatban);
 
     currentRow.addClass('table-active');
-}
-
-<<<<<<< HEAD
-        });
+    }
       function deletedatas(editButton) {
             id=$("#idsach").text();
             var url = "{{ route('adminsqlsach/delete')}}";
@@ -470,29 +331,6 @@ function editBook(button) {
                 success: function(data){
                 if(data.success)
                 {
-=======
-// Delete book function
-function deleteBook(button) {
-    currentRow = $(button).closest('tr');
-    const id = currentRow.find('[data-id]').data('id');
-    $('#deleteId').val(id);
-    currentRow.addClass('table-active');
-}
-
-// Confirm delete
-function confirmDelete() {
-    const id = $('#deleteId').val();
-    $.ajax({
-        url: "{{ route('adminsqlsach/delete') }}",
-        method: "POST",
-        data: {
-            _token: '{{ csrf_token() }}',
-            type: 3,
-            id: id
-        },
-        success: function(data) {
-            if (data.success) {
->>>>>>> 595ccbe1663a52461bf6cf0e62b5175ecd084eff
                 alert(data.success);
                 currentRow.remove();
                 $('#deleteModal').modal('hide');
@@ -530,7 +368,6 @@ function setSelectByText(selector, text) {
         if ($(this).text() === text) {
             $(this).prop('selected', true);
         }
-<<<<<<< HEAD
         function deleteclk(editButton){
             row = $(editButton).parent().parent();
             id = $("#lblid", row).text();
@@ -573,16 +410,3 @@ function setSelectByText(selector, text) {
         })
     </script>
 @endsection
-=======
-    });
-}
-
-// Clean up on modal close
-$('.modal').on('hidden.bs.modal', function() {
-    if (currentRow) {
-        currentRow.removeClass('table-active');
-    }
-});
-</script>
-@endsection
->>>>>>> 595ccbe1663a52461bf6cf0e62b5175ecd084eff
