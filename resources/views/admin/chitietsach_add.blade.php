@@ -35,21 +35,17 @@
 @endsection
 @section('table')
 <div style="width: 1140px;margin: auto;">
-    <form action="{{ route('adminsqlchitietsach/insert/post') }}" method="post">
+    <form id="formChitietSach" action="{{ route('adminsqlchitietsach/insert/post') }}" method="post">
       {{ csrf_field() }}
       <table style="width: 1000px;margin: auto;">
     <tr>
-      <td colspan="2"><center><h2>Thêm chi tiết sản phẩm</h2></center></td>
+      <td colspan="2"><center><h2>Thêm chi tiết sách</h2></center></td>
     </tr>
     <tr>
       <td class="first_td"><label>Tên sách:</label></td>
-      <td class="second_td"><select name="tensach"style="width: 820px;height: 40px;">
-                                  @foreach($sach as $tensach)
-                                        <option value="{{ $tensach->id }}">
-                                     {{ $tensach->tensach }}
-                                    </option>
-                                  @endforeach
-                                  </select></td>
+      <td class="second_td">
+        <input type="text" class="text" name="tensach" required="">
+      </td>
     </tr>
     <tr>
       <td class="first_td"><label>Ngôn ngữ:</label></td>
@@ -101,5 +97,34 @@
     <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
     <script>
      CKEDITOR.replace('noidung');
+     document.getElementById('formChitietSach').addEventListener('submit', function (e) {
+      let fields = [
+        'tensach',
+        'sotrang',
+        'namxuatban',
+        'kichthuoc',
+        'trongluong',
+        'ngayphathanh'
+      ];
+
+      for (let i = 0; i < fields.length; i++) {
+        let field = document.getElementsByName(fields[i])[0];
+        if (!field || field.value.trim() === '') {
+          alert('Vui lòng nhập đầy đủ thông tin vào trường: ' + fields[i]);
+          field.focus();
+          e.preventDefault();
+          return;
+        }
+      }
+
+      // Kiểm tra CKEditor (nội dung mô tả)
+      let mota = CKEDITOR.instances.noidung.getData().trim();
+      if (mota === '') {
+        alert('Vui lòng nhập nội dung mô tả.');
+        CKEDITOR.instances.noidung.focus();
+        e.preventDefault();
+        return;
+      }
+    });
     </script>
 @endpush
