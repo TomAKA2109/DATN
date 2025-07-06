@@ -234,9 +234,7 @@
                     success: function(data) {
                         if (data.success) {
                             alert(data.success);
-                            $('#exampleModalCenter').modal('hide');
-                            row.removeClass("highlightRow");
-                            $(row).remove();
+                            location.reload()
                         } else {
                             alert('There is some error during delete');
                             row.removeClass("highlightRow");

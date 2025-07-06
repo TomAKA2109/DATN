@@ -194,7 +194,6 @@ class admincontroller extends Controller
             Storage::disk('book')->putFileAs('', $image, $imageName);
             $sach->anhbia = $imageName;
         }
-
         $sach->save();
         return response()->json([
             'ok'   => 'update Successfully'
@@ -206,8 +205,8 @@ class admincontroller extends Controller
         $sach->hidden=1;
         $sach->save();
         return response()->json([
-       'success'   => 'Delete Successfully' ,
-      ]);
+            'success'   => 'Delete Successfully' ,
+        ]);
     }
     function qlchitietsach(){
         $chitietsach=chitietsach::all();
