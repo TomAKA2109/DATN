@@ -122,12 +122,13 @@ class admincontroller extends Controller
         $_loaisach=loaisach::all();
         $_nhaxuatban=nhaxuatban::all();
         $_sach=DB::table('sach')
-              ->where('hidden','=',0)
+            ->where('hidden','=',0)
             ->join('loaisach','loaisach.id', '=', 'sach.maloai')
             ->join('nhaxuatban','nhaxuatban.id', '=', 'sach.manhaxuatban')
             ->select('sach.*', 'loaisach.tenloai','nhaxuatban.tennhaxuatban')
             ->get();
-        return View('admin.qlsach',compact('_sach','_loaisach','_nhaxuatban'));
+        $book = new sach();
+        return View('admin.qlsach',compact('_sach','_loaisach','_nhaxuatban', 'book'));
     }
 
     public function insertBook(Request $req){
@@ -162,21 +163,39 @@ class admincontroller extends Controller
             'success'   => 'add Successfully'
         ]);
     }
+
     function sach_update(Request $req){
-        $id=$req->ud_masach;
+        $validator = Validator::make($req->all(), [
+            'tensach' => 'required',
+            'tacgia' => 'required',
+            'soluong' => 'required|min:1',
+            'dongia' => 'required',
+            'anhbia' => 'required',
+            'tap' => 'required',
+            'sotap' => 'required'
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'errors' => $validator->errors()], 422);
+        }
+        $id=$req->id;
         $sach=sach::find($id);
-        $sach->maloai=$req->ud_loaisach;
-        $sach->manhaxuatban=$req->ud_nxb;
-        $sach->tensach=$req->ud_tensach;
-        $sach->tacgia=$req->ud_tacgia;
-        $sach->soluong=$req->ud_soluong;
-        $sach->dongia=$req->ud_dongia;
-        $sach->khuyenmai=$req->ud_khuyenmai;
-        //$sach->anhbia=$req->ud_anhbia;
-        $sach->tap=$req->ud_tap;
-        $sach->sotap=$req->ud_sotap;
+        $sach->maloai=$req->loaisach;
+        $sach->manhaxuatban=$req->nxb;
+        $sach->tensach=$req->tensach;
+        $sach->tacgia=$req->tacgia;
+        $sach->soluong=$req->soluong;
+        $sach->dongia=$req->dongia;
+        $sach->khuyenmai=$req->khuyenmai;
+        $sach->tap=$req->tap;
+        $sach->sotap=$req->sotap;
+        if ($req->hasFile('cover')) {
+            $image = $req->file('cover');
+            $imageName = $image->hashName();
+            Storage::disk('book')->putFileAs('', $image, $imageName);
+            $sach->anhbia = $imageName;
+        }
+
         $sach->save();
-        $req->file();
         return response()->json([
             'ok'   => 'update Successfully'
         ]);
@@ -218,9 +237,9 @@ class admincontroller extends Controller
     }
 
     function qlchitietsach_edit($id){
-       $chitietsach=chitietsach::all();
-       $sachs = sach::findOrFail($id);
-       return view('admin.qlchitietsach.edit', compact('sachs', 'chitietsach'));
+        $chitietsach=chitietsach::all();
+        $sachs = sach::findOrFail($id);
+        return view('admin.qlchitietsach.edit', compact('sachs', 'chitietsach'));
     }
 
     public function logout() {

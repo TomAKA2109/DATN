@@ -67,10 +67,13 @@ Route::group(['prefix' => 'admin','as'=>'admins'], function() {
         Route::post('qlkhachhang/postkh',[admincontroller::class,'postkhachhang'])->name('qlkhachhang/postkh');
         Route::post('qlkhachhang/editkh',[admincontroller::class,'editkhachhang'])->name('qlkhachhang/editkh');
         Route::post('qlkhachhang/deletekh',[admincontroller::class,'deletekhachhang'])->name('qlkhachhang/deletekh');
+
         Route::get('/qlsach',[admincontroller::class,'qlsach'])->name('qlsach');
         Route::post('/qlsach/insert',[admincontroller::class,'insertBook'])->name('qlsach/insert');
-        Route::post('qlsach/update',[admincontroller::class,'sach_update'])->name('qlsach/update');
+        Route::get('/qlsach/{id}/show',[admincontroller::class,'getBookById']);
+        Route::post('/qlsach/update',[admincontroller::class,'sach_update'])->name('qlsach/update');
         Route::post('/qlsach/delete/',[admincontroller::class,'qlsach_delete'])->name('qlsach/delete');
+
         Route::get('/qldanhmuc',[qldanhmuccontroller::class,'qldanhmuc'])->name('qldanhmuc');
         Route::post('/qldanhmuc/insert',[qldanhmuccontroller::class,'qldanhmuc_insert'])->name('qldanhmuc/insert');
         Route::post('/qldanhmuc/update',[qldanhmuccontroller::class,'qldanhmuc_update'])->name('qldanhmuc/update');

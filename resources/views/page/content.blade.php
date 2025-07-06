@@ -15,7 +15,7 @@
 			<div class="product">
 				<div class="image">
 					<div style="position: relative;">
-					<a href="{{ route('chitietsanpham',$sachmoi->id) }}"><img src="{{ asset('/image/anhsanpham/' . $sachmoi->anhbia) }}" alt="{{ $sachmoi->tensach }}"></a>
+					<a href="{{ route('chitietsanpham',$sachmoi->id) }}"><img src="{{ Storage::disk('book')->url($sachmoi->anhbia) }}" alt="{{ $sachmoi->tensach }}"></a>
 					@if($sachmoi->khuyenmai>0)
 					<span class="saleprice" style="background:url({{ url('/image/saleprice.png') }}) no-repeat;">{{ $sachmoi->khuyenmai }}%</span>
 					@endif
@@ -46,7 +46,7 @@
 			<div class="product">
 				<div class="image">
 					<div style="position: relative;">
-					<a href="{{ route('chitietsanpham',$sachgiamgia->id) }}"><img src="{{ asset('/image/anhsanpham').'/'.$sachgiamgia->anhbia}}" alt="" class=""></a>
+					<a href="{{ route('chitietsanpham',$sachgiamgia->id) }}"><img src="{{ Storage::disk('book')->url($sachgiamgia->anhbia) }}" alt="" class=""></a>
 					<span class="saleprice" style="background:url({{ url('/image/saleprice.png') }}) no-repeat;">{{ $sachgiamgia->khuyenmai }}%</span>
 					</div>
 					<a href="{{ route('chitietsanpham',$sachgiamgia->id) }}"><div class="product_name" title="{{ $sachgiamgia->tensach }}">{{ $sachgiamgia->tensach }}</div></a>
@@ -79,8 +79,8 @@
 			<div class="product">
 				<div class="image">
 					<div style="position: relative;">
-					<a href="{{ route('chitietsanpham',$sachbanchay->id) }}"><img src="{{ asset('/image/anhsanpham').'/'.$sachbanchay->anhbia}}" alt="" class=""></a>
-					
+					<a href="{{ route('chitietsanpham',$sachbanchay->id) }}"><img src="{{ Storage::disk('book')->url($sachbanchay->anhbia) }}" alt="" class=""></a>
+
 					<span class="saleprice" style="background:url({{ url('/image/saleprice.png') }}) no-repeat;">{{ $sachbanchay->luotmua }}%</span>
 					</div>
 					<a href="{{ route('chitietsanpham',$sachbanchay->id) }}"><div class="product_name" title="{{ $sachbanchay->tensach }}">{{ $sachbanchay->tensach }}</div></a>
@@ -103,7 +103,7 @@
 		<div class="list_pd">
 			@for($i=1;$i<count($danhmuc)-1;$i++)
 			<div class="product">
-				<div class="image"><a href="{{ route('danhmuc',$danhmuc[$i]->id) }}"><img src="{{ url('/image').'/'.$danhmuc[$i]->anhdaidien }}" alt="" class=""></a>
+				<div class="image"><a href="{{ route('danhmuc',$danhmuc[$i]->id) }}"><img src="{{ Storage::disk('category')->url($danhmuc[$i]->anhdaidien) }}" alt="" class=""></a>
 
 				</div>
 				<div class="category"><a href="{{ route('danhmuc',$danhmuc[$i]->id) }}">{{ $danhmuc[$i]->tendanhmuc }}</a></div>

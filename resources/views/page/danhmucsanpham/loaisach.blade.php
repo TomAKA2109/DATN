@@ -1,6 +1,6 @@
 @extends('index.index')
 @section('title')
-{{ $loaisach->tenloai }}
+    {{ $bookType->tenloai }}
 @endsection
 @section('style')
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/danhmucsach.css') }}">
@@ -94,11 +94,11 @@
 	@include('page.mainmenu')
 @endsection
 @section('content')
-	<div class="pathway"><ul><li><a href="http://127.0.0.1:8000/home" title="Trang chủ">Trang chủ \</a></li><li>{{ $loaisach->tenloai }}</li></ul></div>
+	<div class="pathway"><ul><li><a href="http://127.0.0.1:8000/home" title="Trang chủ">Trang chủ \</a></li><li>{{ $bookType->tenloai }}</li></ul></div>
 	<div class="clear"></div>
-	<h3 style="font-weight: bold;">@if(count($sach)<1)Loại sách này chưa được cung cấp vui lòng chọn loại sách khác!@else{{ $loaisach->tenloai }}@endif</h3>
+	<h3 style="font-weight: bold;">@if(count($sach)<1)Loại sách này chưa được cung cấp vui lòng chọn loại sách khác!@else{{ $bookType->tenloai }}@endif</h3>
 	    <div id="container">
-        <div class="sortable" id="layoutGroup4" style="margin-left: 0;width: 1140px;">    	
+        <div class="sortable" id="layoutGroup4" style="margin-left: 0;width: 1140px;">
             <div class="block" id="module_listproducts">
 	<div class="clear"></div>
 	<div class="pagesright">
@@ -128,7 +128,7 @@
 	<div class="product">
 		<div class="image">
 			<div style="position: relative;">
-			<a href="{{ route('chitietsanpham',$sachs->id) }}"><img src="{{ asset('/image/anhsanpham').'/'.$sachs->anhbia}}" alt="" class=""></a>
+			<a href="{{ route('chitietsanpham',$sachs->id) }}"><img src="{{ Storage::disk('book')->url($sachs->anhbia) }}" alt="" class=""></a>
 			@if($sachs->khuyenmai>0)
 			<span class="saleprice" style="background:url({{ url('public/image/saleprice.png') }}) no-repeat;">{{ $sachs->khuyenmai }}%</span>
 			@endif
@@ -156,9 +156,9 @@
    	@show
     <div class="clear"></div>
 </div>
-            
-        </div>	
-    </div>	
+
+        </div>
+    </div>
 @endsection
 @section('footer')
 	@include('page.footer')

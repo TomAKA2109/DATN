@@ -282,14 +282,11 @@ class homecontroller extends Controller
         ));
     }
 
-
-
-    function getloaisach($id){
+    public function getloaisach($id){
         $sach=sach::where('maloai',$id)->get();
-        $loaisach=loaisach::find($id);
+        $bookType=loaisach::find($id);
         $danhmuc=danhmuc::all();
-    	return View('page.danhmucsanpham.loaisach',compact('sach','loaisach','danhmuc'));
-        // return [$sach, $loaisach];
+    	return view('page.danhmucsanpham.loaisach',compact('sach','bookType','danhmuc'));
     }
 
     function chitietsanpham(Request $request)

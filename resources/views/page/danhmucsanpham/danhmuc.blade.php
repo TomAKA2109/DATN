@@ -129,9 +129,9 @@
                 </div>
             </div>
 
-            
+
         </div>
-        <div class="sortable" id="layoutGroup4">    	
+        <div class="sortable" id="layoutGroup4">
             <div class="block" id="module_listproducts">
                 <h1>{{ $danhmucDangxem->tendanhmuc ?? 'Danh mục sách' }}</h1>
                 <div class="intro"></div>
@@ -152,13 +152,13 @@
                             <option  value="5">Xem nhiều</option>
                             <option  value="6">Ngày xuất bản</option>
                         </select>
-                    </div> 
+                    </div>
                     <div class="clear"></div>
                 </div>
                 <div class="clear"></div>
                 <div class="blockcontent">
                 @section('sanpham')
-                
+
                 @if($sach->isEmpty())
                     <strong style="font-style: italic; color: gray; font-size: 16px; padding: 20px; ">
                         Hiện tại danh mục này chưa có sách mà bạn mong muốn.
@@ -170,7 +170,7 @@
                         <div class="image">
                             <div style="position: relative;">
                                 <a href="{{ route('chitietsanpham', $item->id) }}">
-                                    <img src="{{ asset('/image/anhsanpham/' . $item->anhbia) }}" alt="{{ $item->tensach }}">
+                                    <img src="{{ Storage::disk('book')->url($item->anhbia) }}" alt="{{ $item->tensach }}">
                                 </a>
                                 @if($item->khuyenmai > 0)
                                     <span class="saleprice" style="background:url({{ url('/image/saleprice.png') }}) no-repeat;">
@@ -205,8 +205,8 @@
             @show
             <div class="clear"></div>
         </div>
-            
-    </div>	
+
+    </div>
 @endsection
 @section('footer')
 	@include('page.footer')

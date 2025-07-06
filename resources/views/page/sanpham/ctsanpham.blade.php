@@ -55,7 +55,7 @@
 	<div class="showleft">
 		<div class="image_contenner">
         <div class="mainimage">
-		<img src="{{ asset('/image/anhsanpham').'/'.$sach->anhbia }}" id="mainimage" width="250"/>
+		<img src="{{ Storage::disk('book')->url($sach->anhbia) }}" id="mainimage" width="250"/>
 
         </div>
     </div>
@@ -201,7 +201,7 @@
         @foreach($sach_lienquan as $sach_lienquans)
         <div class="product_contener">
 	        <div class="products">
-			<div class="image"><a href="{{ route('chitietsanpham',$sach_lienquans->id) }}" title=""><img src="{{ asset('/image/anhsanpham').'/'.$sach_lienquans->anhbia }}" alt="" title="" /></a>
+			<div class="image"><a href="{{ route('chitietsanpham',$sach_lienquans->id) }}" title=""><img src="{{ Storage::disk('book')->url($sach_lienquans->anhbia) }}" alt="" title="" /></a>
 				@if($sach_lienquans->khuyenmai>0)
 				<span class="saleprice">{{ $sach_lienquans->khuyenmai }}%</span>
 				@else
