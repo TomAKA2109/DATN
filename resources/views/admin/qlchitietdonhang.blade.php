@@ -42,7 +42,7 @@
                     <tbody>
                         @foreach ($chitietdondathang as $chitietdondathang)
                             <tr>
-                                <td><label id="lblid" class="d-none">{{ $chitietdondathang->id }}</label>{{ $chitietdondathang->id_dondathang }}</td>
+                                <td>{{ $chitietdondathang->id_dondathang }}</td>
                                 <td><img width="100" height="150" src="{{ Storage::disk('book')->url($chitietdondathang->sach->anhbia) }}" /></td>
                                 <td>{{ $chitietdondathang->sach->tensach }}</td>
                                 <td>{{ $chitietdondathang->soluong }}</td>
@@ -51,7 +51,7 @@
                                 <td>{{ $chitietdondathang->updated_at }}</td>
                                 <td style="text-align: center;">
                                     <a href="javascript:void(0)" onclick="document.getElementById('book_{{ $chitietdondathang->id }}').submit()"><img src="{{ url('/image/delete.png') }}"/></a>
-                                    <form method="POST" id="book_{{ $chitietdondathang->id }}" action="{{ url('/admin/qldondathang/'.$chitietdondathang->id.'/sanpham/'.$chitietdondathang->id_sach) }}">
+                                    <form method="POST" id="book_{{ $chitietdondathang->id }}" action="{{ url('/admin/qldondathang/'.$chitietdondathang->id_dondathang.'/chitiet/'.$chitietdondathang->id) }}">
                                         @csrf
                                         @method('DELETE')
                                     </form>

@@ -8,5 +8,5 @@ class dondathang extends Model
 {
     protected $table='dondathang';
 
-    protected $fillable = ['trangthai'];
+    protected $fillable = ['trangthai','tongtien'];
 }
