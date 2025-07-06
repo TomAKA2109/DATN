@@ -128,7 +128,7 @@
                                                 @endphp
                                                 @foreach($products_cart as $product)
                                                 <div class="media">
-                                                    <img width="25%" src="{{ asset('/image/anhsanpham').'/'.$product['item']['anhbia'] }}" alt="" class="pull-left">
+                                                    <img width="25%" src="{{ Storage::disk('book')->url($product['item']['anhbia']) }}" alt="" class="pull-left">
                                                     <div class="media-body" style="margin-left: 30px;">
                                                         <p class="font-large">{{ $product['item']['tensach'] }}</p>
                                                         <span class="color-gray your-order-info">Tác giả: {{ $product['item']['tacgia'] }}</span>

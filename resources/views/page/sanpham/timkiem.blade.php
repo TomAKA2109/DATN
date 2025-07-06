@@ -18,7 +18,7 @@
 
 @section('loaisach')
     @if(count($sach) >= 1)
-        
+
             @foreach($loaisach as $ls_sach)
                 @if($ls_sach['maloai'])
                     <li>
@@ -28,7 +28,7 @@
                     </li>
                 @endif
             @endforeach
-        
+
     @endif
 @endsection
 
@@ -53,7 +53,7 @@
                 <div class="image">
                     <div style="position: relative;">
                         <a href="{{ route('chitietsanpham', $sach_danhmuc_id->id) }}">
-                            <img src="{{ asset('/image/anhsanpham/' . $sach_danhmuc_id->anhbia) }}" alt="">
+                            <img src="{{ Storage::disk('book')->url($sach_danhmuc_id->anhbia) }}" alt="">
                         </a>
                         @if($sach_danhmuc_id->khuyenmai > 0)
                             <span class="saleprice" style="background:url({{ url('/image/saleprice.png') }}) no-repeat;">

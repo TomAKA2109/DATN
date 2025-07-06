@@ -57,7 +57,7 @@ class qlidonhangcontroller extends Controller
     }
 
     function qldondathang(){
-        $dondathang=dondathang::all();
+        $dondathang=dondathang::orderBy('created_at', 'desc')->get();
         return view('admin.qldonhang',compact('dondathang'));
     }
 
@@ -66,26 +66,9 @@ class qlidonhangcontroller extends Controller
         $sach = sach::all();
         return view('admin.qlchitietdonhang',compact('chitietdondathang', 'sach'));
     }
-    function qlchitietdonhang_delete(Request $req){
-        $id=$req->id;
-        $cthd=chitietdondathang::find($id);
-        $hd=dondathang::find($cthd->id_dondathang);
-        $hd_tongtien=$hd->tongtien;
-        $cthd_tongtien=$cthd->soluong*$cthd->dongia;
-        $hd->tongtien=$hd_tongtien-$cthd_tongtien;
-        $hd->save();
-        $cthd->delete();
-        return response()->json([
-       'success'   => 'Delete Successfully!',
-      ]);
-    }
-    function qldonhang_delete(Request $req)
-    {
-        $id=$req->id;
-        $ctdonhang=chitietdondathang::where('id_dondathang',$id)->delete();
-        $donhang=dondathang::find($id)->delete();
-        return response()->json([
-       'success'   => 'Delete Successfully!',
-      ]);
+
+    public function qldondatdang_update(Request $req, $id) {
+        dondathang::find($id)->update(['trangthai' => $req->input('trangthai')]);
+        return redirect('/admin/qldondathang');
     }
 }

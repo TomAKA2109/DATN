@@ -47,7 +47,7 @@
 						<div class="cart-item">
 							<a class="cart-item-delete" href="{{route('xoagiohang',$product['item']['id'])}}"><i class="fa fa-times"></i></a>
 							<div class="media">
-								<a class="pull-left" href="#"><img src="{{ asset('/image/anhsanpham').'/'.$product['item']['anhbia'] }}" alt="" style="width: 50px;height: 70px;"></a>
+								<a class="pull-left" href="#"><img src="{{ Storage::disk('book')->url($product['item']['anhbia']) }}" alt="" style="width: 50px;height: 70px;"></a>
 								<div class="media-body" id="cart_body">
 									<span class="cart-item-title">{{ $product['item']['tensach'] }}</span>
 									<span class="cart-item-options">Tác giả:{{ $product['item']['tacgia'] }}</span>

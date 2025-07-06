@@ -82,7 +82,7 @@ Route::group(['prefix' => 'admin','as'=>'admins'], function() {
         Route::get('/qldondathang', [qlidonhangcontroller::class, 'qldondathang'])->name('qldondathang');
         Route::post('/qldondathangs/delete',[qlidonhangcontroller::class,'qldonhang_delete'])->name('delete_donhang');
         Route::get('/qldondathang/{id_donhang}',[qlidonhangcontroller::class,'qlchitietdonhang'])->name('chitietdonhang');
-        Route::post('/qldondathang/delete',[qlidonhangcontroller::class,'qlchitietdonhang_delete'])->name('chitietdonhang/delete');
+        Route::put('/qldondathang/{id}/trangthai/update',[qlidonhangcontroller::class,'qldondatdang_update'])->name('chitietdonhang/delete');
 
         Route::get('/qlchitietsach',[admincontroller::class,'qlchitietsach'])->name('qlchitietsach');
         Route::get('/qlchitietsach/insert',[admincontroller::class,'qlchitietsach_insert'])->name('qlchitietsach/insert');

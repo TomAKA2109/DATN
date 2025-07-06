@@ -7,4 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class dondathang extends Model
 {
     protected $table='dondathang';
+
+    protected $fillable = ['trangthai'];
 }

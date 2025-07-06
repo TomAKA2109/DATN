@@ -34,7 +34,7 @@
 	<div class="product">
 		<div class="image">
 			<div style="position: relative;">
-			<a href="{{ route('chitietsanpham',$sach_danhmuc_id->id) }}"><img src="{{ asset('/image/anhsanpham').'/'.$sach_danhmuc_id->anhbia}}" alt="" class=""></a>
+			<a href="{{ route('chitietsanpham',$sach_danhmuc_id->id) }}"><img src="{{ Storage::disk('book')->url($sach_danhmuc_id->anhbia) }}" alt="" class=""></a>
 			@if($sach_danhmuc_id->khuyenmai>0)
 			<span class="saleprice" style="background: url('{{ asset('/image/saleprice.png') }}') no-repeat;">{{ $sach_danhmuc_id->khuyenmai }}%</span>
 			@endif
