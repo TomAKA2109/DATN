@@ -88,7 +88,7 @@ Route::group(['prefix' => 'admin','as'=>'admins'], function() {
         Route::get('/qlchitietsach/insert',[admincontroller::class,'qlchitietsach_insert'])->name('qlchitietsach/insert');
         Route::post('/qlchitietsach/insert/post',[admincontroller::class,'qlchitietsach_insert_post'])->name('qlchitietsach/insert/post');
         Route::get('/qlchitietsach/{id}/edit',[admincontroller::class,'qlchitietsach_edit'])->name('qlchitietsach.edit');
-        Route::put('/qlchitietsach/{id}/',[admincontroller::class,'qlchitietsach_update'])->name('qlchitietsach.edit.post');
+        Route::put('/qlchitietsach/{id}',[admincontroller::class,'qlchitietsach_update'])->name('qlchitietsach.edit.post');
     });
 });
 

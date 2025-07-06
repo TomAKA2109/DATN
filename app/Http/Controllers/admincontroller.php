@@ -250,10 +250,11 @@ class admincontroller extends Controller
         return redirect('/admin/login');
     }
 
-    function qlchitietsach_edit_post(Request $request, $id){
-        $sach = sach::find(['id' => $id]);
+    function qlchitietsach_update(Request $request, $id){
+        $sach = chitietsach::find($id);
         if ($sach) {
             $sach->save($request->input());
         }
+        return redirect('/admin/qlchitietsach');
     }
 }
