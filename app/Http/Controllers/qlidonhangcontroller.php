@@ -62,13 +62,19 @@ class qlidonhangcontroller extends Controller
     }
 
     function qlchitietdonhang($id_donhang){
-        $chitietdondathang=chitietdondathang::where('id_dondathang',$id_donhang)->get();
-        $sach = sach::all();
-        return view('admin.qlchitietdonhang',compact('chitietdondathang', 'sach'));
+        $order = dondathang::find($id_donhang);
+        $chitietdondathang=chitietdondathang::where('id_dondathang',$id_donhang)->with('sach')->get();
+        return view('admin.qlchitietdonhang',compact('chitietdondathang', 'order'));
     }
 
     public function qldondatdang_update(Request $req, $id) {
         dondathang::find($id)->update(['trangthai' => $req->input('trangthai')]);
         return redirect('/admin/qldondathang');
+    }
+
+    public function qldondatdang_sanpham_delete($orderId, $productId) {
+        chitietdondathang::where(['id_dondathang' => $orderId, 'id_sach' => $productId])->delete();
+        
+        return redirect('/admin/qldondathang/'.$orderId);
     }
 }

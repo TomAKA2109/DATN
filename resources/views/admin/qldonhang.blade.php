@@ -119,7 +119,7 @@
                                     </div>
                                 </td>
                                 <td style="text-align: center;">
-                                    <a class="btn btn-primary" href="/admin/qldondathang/{{ $dondathangs->id }}"><i
+                                    <a href="/admin/qldondathang/{{ $dondathangs->id }}"><i
                                             class="fa-solid fa-eye"></i>
                                 </td>
                             </tr>
