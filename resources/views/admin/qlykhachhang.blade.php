@@ -215,7 +215,6 @@
                 </table>
               </div>
             </div>
-            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
           </div>
 
         </div>
@@ -348,7 +347,7 @@
       var row;
       var id,hoten,username,phonenumber,address,mail;
       function Updatesdatas(editButton) {
-            var url = "{{ route('adminsqlkhachhang/editkh')}}"; 
+            var url = "{{ route('adminsqlkhachhang/editkh')}}";
             id=$("#txtidkh").val();
             ten = $("#txttenkhachang").val();
             username = $("#txtusername").val();
@@ -385,14 +384,14 @@
              }
              else{
                  alert("Internal Server Error");
-             }            
+             }
           }
         });
             return false;
         }
 
       function deletedatas(editButton) {
-            var url = "{{ route('adminsqlkhachhang/deletekh')}}"; 
+            var url = "{{ route('adminsqlkhachhang/deletekh')}}";
             id=$("#idkh").text();
             $.ajax({
                 type: "POST",
