@@ -37,36 +37,36 @@
 
     <!-- Custom styles for this template-->
     <link href="{{ asset('css/sb-admin.css') }}" rel="stylesheet">
-      @yield('css')
-      <style>
-      .highlightRow {
-            background-color: #dadada;
+        @yield('css')
+        <style>
+        .highlightRow {
+                background-color: #dadada;
+            }
+        img{
+            cursor: pointer;
         }
-      img{
-        cursor: pointer;
-      }
-      #btnadd {
-          float: right;
-          height: 38px;
-          border-radius: 7px;
-          color: white;
-      }
-      select .option {
-          width: 250px;
-      }
+        #btnadd {
+            float: right;
+            height: 38px;
+            border-radius: 7px;
+            color: white;
+        }
+        select .option {
+            width: 250px;
+        }
 
-      .option {
-          overflow: hidden;
-          white-space: nowrap;
-          text-overflow: ellipsis;
-      }
-      </style>
-     @show
+        .option {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+        </style>
+        @show
 
 
-  </head>
+    </head>
 
-  <body id="page-top">
+<body id="page-top">
 
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
@@ -123,11 +123,7 @@
         </li>
         @show
         <!-- @section('loaisach')
-        <li class="nav-item">
-            <a class="nav-link" href="">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Quản lý loại sách</span></a>
-        </li>
+
         @show -->
         @section('sach')
         <li class="nav-item">

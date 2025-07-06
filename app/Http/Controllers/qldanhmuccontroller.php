@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\danhmuc;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -35,7 +36,7 @@ class qldanhmuccontroller extends Controller
                 }
             }
             $requestInput = $req->input();
-            $data = array_merge($requestInput, ['anhdaidien' => $imageName]);
+            $data = array_merge($requestInput, ['anhdaidien' => $imageName, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()]);
             danhmuc::insert($data);
 
             return response()->json([

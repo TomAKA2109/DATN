@@ -155,21 +155,21 @@
     </div>
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Xóa Sản phẩm </h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="CloseEditdatasDialog();">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            Bạn có chắc chắn muốn xóa sản phẩm này <label id="idsach" style="display: none;"></label> ?
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" onclick="deletedatas(this);" >Xóa</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="CloseEditdatasDialog();">Hủy</button>
-        </div>
-        </div>
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Xóa danh mục </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="CloseEditdatasDialog();">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc chắn muốn danh mục này <label id="idsach" style="display: none;"></label> ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="deletedatas(this);" >Xóa</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="CloseEditdatasDialog();">Hủy</button>
+            </div>
+            </div>
         </div>
     </div>
 @endsection
@@ -244,31 +244,31 @@
 
         });
       function deletedatas(editButton) {
-            id=$("#idsach").text();
+            const id=$("#idsach").text();
             var url = "{{ route('adminsqldanhmuc/delete')}}";
             $.ajax({
                 type: "POST",
                 url: url,
                 cache: false,
                 data:{
-                _token:'{{ csrf_token() }}',
-                type: 3,
-                id:id,
+                    _token:'{{ csrf_token() }}',
+                    type: 3,
+                    id:id,
                 },
                 success: function(data){
                 if(data.success)
                 {
-                alert(data.success);
-                $('#exampleModalCenter').modal('hide');
-                row.removeClass("highlightRow");
-                $(row).remove();
-                      }
+                    alert(data.success);
+                    $('#exampleModalCenter').modal('hide');
+                    row.removeClass("highlightRow");
+                    $(row).remove();
+                }
                 else {
-                alert('There is some error during delete');
-                row.removeClass("highlightRow");
-                      }
-                      }
-                      });
+                    alert('There is some error during delete');
+                    row.removeClass("highlightRow");
+                }
+                }
+            });
                 // return false;
         }
       function Editdatas(editButton) {

@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class admincontroller extends Controller
 {
@@ -127,11 +129,24 @@ class admincontroller extends Controller
             ->get();
         return View('admin.qlsach',compact('_sach','_loaisach','_nhaxuatban'));
     }
-    function insertdatas(Request $req){
+
+    public function insertBook(Request $req){
+        $validator = Validator::make($req->all(), [
+            'tensach' => 'required',
+            'tacgia' => 'required',
+            'soluong' => 'required|min:1',
+            'dongia' => 'required',
+            'anhbia' => 'required|file',
+            'tap' => 'required',
+            'sotap' => 'required'
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'errors' => $validator->errors()], 422);
+        }
         $sach=new sach();
-        $image = $req->file('select_file');
-        $new_name = rand() . '.' . $image->getClientOriginalExtension();
-        $image->move('public/image/anhsanpham', $new_name);
+        $image = $req->file('anhbia');
+        $imageName = $image->hashName();
+        Storage::disk('book')->putFileAs('', $image, $imageName);
         $sach->maloai=$req->loaisach;
         $sach->manhaxuatban=$req->nxb;
         $sach->tensach=$req->tensach;
@@ -139,13 +154,13 @@ class admincontroller extends Controller
         $sach->soluong=$req->soluong;
         $sach->dongia=$req->dongia;
         $sach->khuyenmai=$req->khuyenmai;
-        $sach->anhbia=$new_name;
+        $sach->anhbia=$imageName;
         $sach->tap=$req->tap;
         $sach->sotap=$req->sotap;
         $sach->save();
         return response()->json([
-       'success'   => 'add Successfully'
-      ]);
+            'success'   => 'add Successfully'
+        ]);
     }
     function sach_update(Request $req){
         $id=$req->ud_masach;

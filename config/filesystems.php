@@ -58,8 +58,14 @@ return [
             'root' => storage_path('app/public/categories'),
             'url' => 'http://127.0.0.1:8000/storage/categories',
             'visibility' => 'public',
-        ]
+        ],
 
+        'book' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/book'),
+            'url' => 'http://127.0.0.1:8000/storage/book',
+            'visibility' => 'public',
+        ],
     ],
 
     /*
