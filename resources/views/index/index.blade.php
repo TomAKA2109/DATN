@@ -18,6 +18,8 @@
 	@yield('style')
 </head>
 <body>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v23.0"></script>
 	<div style="width: 100%;height: auto;">
 		<div id="head">
 			@yield('header')
