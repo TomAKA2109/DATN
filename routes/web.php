@@ -56,10 +56,11 @@ Route::put('/qldondathang/{id}/trangthai/update', [qlidonhangcontroller::class, 
 
 
 Route::group(['prefix' => 'admin','as'=>'admins'], function() {
-    Route::get('/login',[admincontroller::class,'getlogin'])->name('getlogin');
-    Route::post('/login',[admincontroller::class,'postlogin'])->name('admin');
+    Route::get('/login',[admincontroller::class,'getlogin'])->name('getlogin')->middleware('redirect-to-dashboard-if-admin-authenticated');
+    Route::post('/login',[admincontroller::class,'postlogin'])->name('admin')->middleware('redirect-to-dashboard-if-admin-authenticated');
 
     Route::group(['middleware' => 'must-admin'], function() {
+        Route::get('/dashboard', [admincontroller::class, 'dashboard']);
         Route::post('/logout',[admincontroller::class,'logout'])->name('admin');
 
         Route::get('/qlkhachhang1/addusers',[admincontroller::class,'addkhachhang1'])->name('qlkhachhang1/addusers');

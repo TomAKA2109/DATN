@@ -64,6 +64,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'must-admin' => \App\Http\Middleware\AdminMustAuthenticated::class,
-        'must-authenticated' => \App\Http\Middleware\CustomerMustAuthenticated::class
+        'must-authenticated' => \App\Http\Middleware\CustomerMustAuthenticated::class,
+        'redirect-to-dashboard-if-admin-authenticated' => \App\Http\Middleware\RedirectToAdminDashboardIfAdminAuthenticated::class
     ];
 }

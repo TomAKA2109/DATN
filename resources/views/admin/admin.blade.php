@@ -108,9 +108,9 @@
         <!-- Sidebar -->
         <ul class="sidebar navbar-nav">
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{{ url('admin/dashboard') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Admin</span>
+            <span>Dashboard</span>
             </a>
         </li>
         @section('danhmuc')

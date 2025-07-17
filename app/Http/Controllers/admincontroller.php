@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\khachhang;
 use App\Models\chitietsach;
+use App\Models\danhmuc;
 use App\Models\sach as sach;
 use App\Models\loaisach as loaisach;
 use App\Models\ngonngu;
@@ -255,5 +256,23 @@ class admincontroller extends Controller
             $sach->save($request->input());
         }
         return redirect('/admin/qlchitietsach');
+    }
+
+    /**
+     * Dashboard page
+     */
+    public function dashboard() {
+        $customerStat = khachhang::all()->count();
+        $totalAmount = dondathang::where('trangthai', 2)->sum('tongtien');
+        $formattedAmount = number_format($totalAmount, 0, ',', '.');
+        $bookStat = sach::all()->count();
+        $categoryStat = danhmuc::all()->count();
+
+        return view('admin.dashboard', [
+            'customerStat' => $customerStat,
+            'totalAmount' => $formattedAmount,
+            'bookStat' => $bookStat,
+            'categoryStat' => $categoryStat
+        ]);
     }
 }
