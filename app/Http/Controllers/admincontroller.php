@@ -109,15 +109,14 @@ class admincontroller extends Controller
             $userData->save();
             return json_encode(array('statusCode'=>200));
             }
-
-
-
     }
+
     function deletekhachhang(Request $req){
         $id=$req->id;
         $res=khachhang::where('id',$id)->delete();
         return json_encode(array('statusCode'=>200));
     }
+
     function qlsach(){
         $_loaisach=loaisach::all();
         $_nhaxuatban=nhaxuatban::all();

@@ -82,4 +82,9 @@ class qlidonhangcontroller extends Controller
         $chiTietDonHang->delete();
         return redirect('/admin/qldondathang/'.$orderId);
     }
+
+    public function cancelOrder(Request $req, $id) {
+        dondathang::find($id)->update(['trangthai' => $req->input('trangthai')]);
+        return redirect()->back();
+    }
 }

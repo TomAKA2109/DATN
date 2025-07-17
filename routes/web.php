@@ -46,6 +46,7 @@ Route::post('/timkiem/',['as'=>'timkiem', 'uses'=>[homecontroller::class,'timkie
 Route::get('/searching', [homecontroller::class, 'timkiem_key'])->name('timkiem_key');
 Route::get('/dangki', [khachhangcontroller::class, 'hienThiDangKy'])->name('dangki');
 Route::post('/dangki', [khachhangcontroller::class, 'dangKy'])->name('dangki');
+Route::put('/qldondathang/{id}/trangthai/update', [qlidonhangcontroller::class, 'cancelOrder']);
 
 /**
  * Admin Routes

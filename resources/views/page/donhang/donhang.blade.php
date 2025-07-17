@@ -5,7 +5,14 @@
     @include('page.mainmenu')
 @endsection
 
+@section('title')
+    Đơn hàng của tôi
+@endsection
+
 @section('content')
+@php
+        use Carbon\Carbon;
+@endphp
 <div class="container mt-5">
     <div class="row">
 
@@ -19,9 +26,10 @@
                         <th>STT</th>
                         <th>Mã Đơn Hàng</th>
                         <th>Người đặt</th>
-                        <th>Số điện thoại</th>
+                        <th>Ngày đặt</th>
                         <th>Tổng cộng</th>
                         <th>Trạng thái</th>
+                        <th>Hành động</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,17 +38,27 @@
                             <td>{{ $index + 1 }}</td>
                             <td>{{ $donhang->id }}</td>
                             <td>{{ $donhang->hoten }}</td>
-                            <td>{{ $donhang->sodienthoai }}</td>
+                            <td>{{ Carbon::parse($donhang->created_at)->format('d/m/Y H:i:s') }}</td>
                             <td>{{ number_format($donhang->tongtien, 0, ',', '.') }}₫</td>
                             <td>
                                 @if ($donhang->trangthai == 0)
-                                    <span class="badge badge-warning">Chờ xác nhận</span>
+                                    <span class="badge badge-warning">Đã xác nhận</span>
                                 @elseif ($donhang->trangthai == 1)
                                     <span class="badge badge-info">Đang giao</span>
                                 @elseif ($donhang->trangthai == 2)
                                     <span class="badge badge-success">Hoàn tất</span>
-                                @else
+                                @elseif ($donhang->trangthai == 3)
                                     <span class="badge badge-secondary">Hủy</span>
+                                @endif
+                            </td>
+                            <td>
+                                @if($donhang->trangthai == 0 || $donhang->trangthai == 1)
+                                    <button class="btn btn-danger" onclick="document.getElementById('donhang-{{ $donhang->id }}').submit()">Hủy</button>
+                                    <form id="donhang-{{ $donhang->id }}" action="{{ url('qldondathang/'.$donhang->id.'/trangthai/update') }}" method="POST">
+                                        @method('PUT')
+                                        <input type="hidden" name="trangthai" value="3"/>
+                                        @csrf
+                                    </form
                                 @endif
                             </td>
                         </tr>

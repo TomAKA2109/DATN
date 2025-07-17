@@ -66,7 +66,7 @@ class homecontroller extends Controller
 
         // Lấy đơn hàng theo id_khachhang và chọn rõ các cột
         $donhangs = DB::table('dondathang')
-            ->select('id', 'hoten', 'sodienthoai', 'tongtien', 'trangthai') // Thêm dòng này
+            ->select('*') // Thêm dòng này
             ->where('id_khachhang', $khachhang->id)
             ->orderByDesc('id')
             ->get();
