@@ -109,7 +109,7 @@ class admincontroller extends Controller
             $userData->mail = request('mail');
             $userData->save();
             return json_encode(array('statusCode'=>200));
-            }
+        }
     }
 
     function deletekhachhang(Request $req){

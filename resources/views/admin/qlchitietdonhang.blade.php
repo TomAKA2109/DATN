@@ -36,7 +36,6 @@
                             <th>Đơn giá</th>
                             <th>Ngày tạo</th>
                             <th>Ngày sửa</th>
-                            <th>Edit</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -47,15 +46,8 @@
                                 <td>{{ $chitietdondathang->sach->tensach }}</td>
                                 <td>{{ $chitietdondathang->soluong }}</td>
                                 <td>{{ number_format($chitietdondathang->dongia, 0, ',', '.') }}</td>
-                                <td>{{ $chitietdondathang->created_at }}</td>
-                                <td>{{ $chitietdondathang->updated_at }}</td>
-                                <td style="text-align: center;">
-                                    <a href="javascript:void(0)" onclick="document.getElementById('book_{{ $chitietdondathang->id }}').submit()"><img src="{{ url('/image/delete.png') }}"/></a>
-                                    <form method="POST" id="book_{{ $chitietdondathang->id }}" action="{{ url('/admin/qldondathang/'.$chitietdondathang->id_dondathang.'/chitiet/'.$chitietdondathang->id) }}">
-                                        @csrf
-                                        @method('DELETE')
-                                    </form>
-                                </td>
+                                <td>{{ Carbon\Carbon::parse($chitietdondathang->created_at)->format('d/m/Y H:i:s') }}</td>
+                                <td>{{ Carbon\Carbon::parse($chitietdondathang->updated_at)->format('d/m/Y H:i:s') }}</td>
                             </tr>
                         @endforeach
                     </tbody>
