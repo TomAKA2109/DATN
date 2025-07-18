@@ -12,23 +12,21 @@
     @if(count($sach) < 1)
         {{ $error }}
     @else
-        Tìm Kiếm Sản Phẩm Với Từ Khóa: "{{ $key }}" Tìm Thấy {{ count($sach) }} Kết Quả
+        Tìm Kiếm Sản Phẩm Với Từ Khóa: "{{ $key }}" - Tìm Thấy {{ count($sach) }} Kết Quả
     @endif
 @endsection
 
 @section('loaisach')
     @if(count($sach) >= 1)
-
             @foreach($loaisach as $ls_sach)
                 @if($ls_sach['maloai'])
                     <li>
                         <a href="{{ route('loaisach', $ls_sach['maloai']) }}" >
-                             ({{ $ls_sach['sl'] }})
+                            ({{ $ls_sach['sl'] }})
                         </a>
                     </li>
                 @endif
             @endforeach
-
     @endif
 @endsection
 
@@ -72,14 +70,6 @@
                     </div>
                     <div class="rootprices">
                         {{ number_format($sach_danhmuc_id->dongia, 0, ",", ".") }}₫
-                    </div>
-                    <div class="rating">
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="comment">(30 nhận xét)</span>
                     </div>
                 </div>
             </div>
