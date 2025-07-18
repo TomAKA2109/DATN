@@ -26,6 +26,7 @@ Route::get('/', function() {
 });
 Route::get('/home',[homecontroller::class,'gethome'])->name('home');
 Route::get('/admin/loaisach',[admincontroller::class,'getloaisach'])->name('admin/loaisach');
+Route::get('/tacgia/{tacgia}',[homecontroller::class,'viewBookByAuthor'])->name('author');
 Route::get('/danhmuc/{id}',[homecontroller::class,'getdanhmuc'])->name('danhmuc');
 Route::get('/danhmuc/{id}/{tacgia}',[homecontroller::class,'danhmuc_tacgia'])->name('danhmuc/tacgia');
 Route::get('/danh-muc/{id}/{tacgia}', [homecontroller::class,'getlocTheoTacGia'])->name('timtheotacgia');

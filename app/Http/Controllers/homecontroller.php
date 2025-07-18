@@ -486,5 +486,9 @@ class homecontroller extends Controller
         // return $loaisach;
     }
 
+    public function viewBookByAuthor($tacgia) {
+        $sach = sach::where('tacgia', $tacgia)->get();
+        return view('page.timkiem.tacgia', compact('sach'));
+    }
 
 }

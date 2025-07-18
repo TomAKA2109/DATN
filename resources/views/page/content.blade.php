@@ -27,7 +27,7 @@
                             <a href="{{ route('chitietsanpham', $sachmoi->id) }}">
                                 <div class="product_name" title="{{ $sachmoi->tensach }}">{{ $sachmoi->tensach }}</div>
                             </a>
-                            <div class="product_composer"><a href="">{{ $sachmoi->tacgia }}</a></div>
+                            <div class="product_composer"><a href="{{ url('/tacgia/'.$sachmoi->tacgia) }}">{{ $sachmoi->tacgia }}</a></div>
                             <div class="prices">
                                 {{ number_format($sachmoi->dongia - ($sachmoi->dongia * $sachmoi->khuyenmai) / 100, 0, ',', '.') }}₫
                             </div>
@@ -58,7 +58,7 @@
                                 <div class="product_name" title="{{ $sachgiamgia->tensach }}">{{ $sachgiamgia->tensach }}
                                 </div>
                             </a>
-                            <div class="product_composer"><a href="">{{ $sachgiamgia->tacgia }}</a></div>
+                            <div class="product_composer"><a href="{{ url('/tacgia/'.$sachgiamgia->tacgia) }}">{{ $sachgiamgia->tacgia }}</a></div>
                             <div class="prices">
                                 {{ number_format($sachgiamgia->dongia - ($sachgiamgia->dongia * $sachgiamgia->khuyenmai) / 100, 0, ',', '.') }}₫
                             </div>
@@ -94,7 +94,7 @@
                                 <div class="product_name" title="{{ $sachbanchay->tensach }}">{{ $sachbanchay->tensach }}
                                 </div>
                             </a>
-                            <div class="product_composer"><a href="">{{ $sachbanchay->tacgia }}</a></div>
+                            <div class="product_composer"><a href="{{ url('/tacgia/'.$sachbanchay->tacgia) }}">{{ $sachbanchay->tacgia }}</a></div>
                             <div class="prices">
                                 {{ number_format($sachbanchay->dongia - ($sachbanchay->dongia * $sachbanchay->luotmua) / 100, 0, ',', '.') }}₫
                             </div>

@@ -50,7 +50,7 @@
                         <div class="product_name" title="{{ $sach_danhmuc_ids->tensach }}">
                             {{ $sach_danhmuc_ids->tensach }}</div>
                     </a>
-                    <div class="product_composer">{{ $sach_danhmuc_ids->tacgia }}</div>
+                    <div class="product_composer"><a href="{{ url('/tacgia/'.$sach_danhmuc_ids->tacgia) }}">{{ $sach_danhmuc_ids->tacgia }}</a></div>
                     <div class="prices">
                         {{ number_format($sach_danhmuc_ids->dongia - ($sach_danhmuc_ids->dongia * $sach_danhmuc_ids->khuyenmai) / 100, 0, ',', '.') }}₫
                     </div>

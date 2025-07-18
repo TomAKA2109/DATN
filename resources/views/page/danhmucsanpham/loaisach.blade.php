@@ -162,7 +162,7 @@
                                 <a href="{{ route('chitietsanpham', $sachs->id) }}">
                                     <div class="product_name" title="{{ $sachs->tensach }}">{{ $sachs->tensach }}</div>
                                 </a>
-                                <div class="product_composer">{{ $sachs->tacgia }}</div>
+                                <div class="product_composer"><a href="{{ url('/tacgia/'.$sachs->tacgia) }}">{{ $sachs->tacgia }}</a></div>
                                 <div class="prices">
                                     {{ number_format($sachs->dongia - ($sachs->dongia * $sachs->khuyenmai) / 100, 0, ',', '.') }}₫
                                 </div>
